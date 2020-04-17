@@ -14,7 +14,7 @@ namespace HHVM\UserDocumentation;
 use namespace HH\Lib\{C, Vec};
 
 final class SiteMapBuildStep extends BuildStep {
-  const string ROOT = 'https://docs.hhvm.com';
+  const string ROOT = 'https://docs.hhvm-cn.com';
 
   <<__Override>>
   public function buildAll(): void {
