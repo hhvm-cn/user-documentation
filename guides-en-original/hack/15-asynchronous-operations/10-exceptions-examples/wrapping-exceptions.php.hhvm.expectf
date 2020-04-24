@@ -1,0 +1,51 @@
+vec(2) {
+  object(HH\Asio\WrappedException) (%d) {
+    ["exception":"HH\Asio\WrappedException":private]=>
+    object(Exception) (%d) {
+      ["message":protected]=>
+      string(0) ""
+      ["string":"Exception":private]=>
+      string(0) ""
+      ["code":protected]=>
+      int(0)
+      ["file":protected]=>
+      string(%d) "%s"
+      ["line":protected]=>
+      int(9)
+      ["trace":"Exception":private]=>
+      array(3) {
+        [0]=>
+        array(3) {
+          ["file"]=>
+          string(%d) "%s"
+          ["line"]=>
+          int(18)
+          ["function"]=>
+          string(78) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\exception_thrower"
+        }
+        [1]=>
+        array(3) {
+          ["file"]=>
+          string(%d) "%s"
+          ["line"]=>
+          int(29)
+          ["function"]=>
+          string(80) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\wrapping_exceptions"
+        }
+        [2]=>
+        array(1) {
+          ["function"]=>
+          string(65) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\main"
+        }
+      }
+      ["previous":"Exception":private]=>
+      NULL
+      ["userMetadata":protected]=>
+      NULL
+    }
+  }
+  object(HH\Asio\WrappedResult) (%d) {
+    ["result":"HH\Asio\WrappedResult":private]=>
+    int(2)
+  }
+}
