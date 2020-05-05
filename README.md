@@ -1,8 +1,6 @@
-# HHVM and Hack User Documentation [![Build Status](https://travis-ci.org/hhvm/user-documentation.svg?branch=master)](https://travis-ci.org/hhvm/user-documentation)
+# HHVM/Hack 开发者中文文档 [![Build Status](https://travis-ci.org/hhvm/user-documentation.svg?branch=master)](https://travis-ci.org/hhvm/user-documentation)
 
-This is the repo for the [HHVM and Hack user documentation](http://docs.hhvm.com). [Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome.
-
-If you see anything egregious, you can [file an issue](https://github.com/hhvm/user-documentation/issues/new) or ping us at #hhvm-dev on Freenode IRC or [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
+本仓库包含 [HHVM/Hack开发者中文文档](https://github.com/hhvm-cn/user-documentation) 的文档和构建文档的源码，我们非常期待您能与我们一起翻译或者是[提出反馈](https://github.com/hhvm-cn/user-documentation/issues/new)！
 
 ## What?
 
@@ -26,41 +24,37 @@ Our strategy to create better documentation begins with a re-thinking of our doc
 
 Check out the [source code](https://github.com/hhvm/user-documentation/tree/master/src) for building the site. [`bin/build.php`](https://github.com/hhvm/user-documentation/blob/master/bin/build.php) is where all the execution begins.
 
-## Running A Local Copy
+## 利用 Docker 搭建本地文档
 
-If you just want to quickly run a copy and don't plan on contributing changes:
+如果你只是想快速地在本地搭建一个文档，你可以按如下步骤操作：
 
-1. Install [Docker](https://docs.docker.com/engine/installation/)
-2. `docker run -p 8080:80 -d hhvm/user-documentation`; this will output a
-   container ID
-3. You can then access a local copy of the documentation at
-   `http://localhost:8080`
-4. To stop the instance, run `docker stop ID_FROM_STEP_2_ABOVE`. If you don't
-   have a copy of that ID any more, run `docker ps` and use the container name
-   in the right-most column instead.
+1. 安装 [Docker](https://docs.docker.com/engine/installation/)
+2. 在终端执行 `docker run -p 8080:80 -d hhvm/user-documentation` 启动一个容器（这个时候你会看到终端输出了一个容器 ID）
+3. 用浏览器访问 `http://localhost:8080`，就可以看到 HHVM/Hack 的（英文）文档了
+4. 如果想停止容器，请在终端执行 `docker stop 第二步得到的容器ID`；如果你忘了复制第二步输出的容器ID，你可以执行 `docker ps` 来获取容器的名称或者ID，然后再执行 `docker stop 容器名称/容器ID`
 
-## Building The Site
+## 构建文档
 
-If you would like to build the site locally (e.g., to test your [content contributions](#contributing-content)), you will need to install and configure your system to be able to build and run the site locally.
+如果你想要在本地构建文档（例如预览你翻译的文档），你需要安装 PHP 7.0+/Composer 和 hhvm-4.52（本仓库从 Facebook 官方仓库 fork 出来时只能在 hhvm-4.52 下能构建成功）。
 
 These are the basic step-by-step instructions to get you up and running. It assumes certain packages are installed on your system. Click [here](installation-detailed.md) for detailed installation information.
 
-1. Clone this repository
-1. `cd path/to/user-documentation`
-1. `php /path/to/composer.phar install` # Make sure you have composer downloaded
-1. `hhvm bin/build.php` # build the site!
+当你安装好环境之后，按如下步骤即可在本地构建文档：
 
-Follow the next steps to access this build from a browser.
+1. 克隆本仓库到本地
+2. `cd path/to/user-documentation`
+3. `php /path/to/composer.phar install`
+4. `hhvm bin/build.php`
 
-## Running The Site From A Checkout
+至此，文档已经构建好了，按照下面的步骤去启动一个 webserver
 
-Configure a webserver and HHVM to serve the `public/` directory, with all
-requests that don't match a file being served by `index.php`. For local
-development, HHVM's built-in webserver should be sufficient:
+## 启动文档站
+
+在 `public/` 目录中配置和启动 HHVM webserver，它会将所有没有命中实际文件的请求转发给 `index.php` 去处理（类似于 Laravel 等框架的 nginx url 重写配置）。在本地调试时，用 HHVM 内置的 webserver 已经足够了：
 
 ```
 $ cd public
 $ hhvm -m server -p 8080 -c ../hhvm.dev.ini
 ```
 
-Then, in your browser, go to http://localhost:8080
+然后用浏览器访问 http://localhost:8080 即可
