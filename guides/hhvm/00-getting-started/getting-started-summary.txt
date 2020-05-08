@@ -1,1 +1,1 @@
-Get started with HHVM quickly and easily.
+快速上手 HHVM

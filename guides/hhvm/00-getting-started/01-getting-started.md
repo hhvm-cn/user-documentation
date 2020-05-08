@@ -1,33 +1,33 @@
-If you are new to HHVM, this getting started guide should help get you up an running quickly. Of course, as this is meant to be a getting started, not every detail will be provided here. The main [HHVM user guide](..) will be your resource for full information.
+如果你之前没有接触过 HHVM，这个快速指南可以让你快速上手，当然了，作为快速指南，说明这里不会展开太多复杂的细节，如果你需要查看完整的文档，请点击[这里](..)
 
-## Overview
+## 概览
 
-The infrastructure you need to run code with HHVM is pretty simple:
+用 HHVM 来运行你的代码是非常简单的，你只需要准备：
 
-* HHVM itself
-* Some Hack code
+* HHVM 本身
+* Hack 代码
 
-For this setup, although various flavors of Debian and Ubuntu are supported with [official packages](../installation/introduction.md#prebuilt-packages), the most recent Ubuntu LTS and the most recent Ubuntu stable release are likely to be the *best* supported and easiest to install.
+在安装的时候，虽然不同版本的 Debian 和 Ubuntu 你都能获取到[官方编译的 HHVM](../installation/introduction.md#prebuilt-packages)，但还是建议你在最新的 Ubuntu LTS 上安装以获得最佳安装体验。
 
-## Install HHVM
+## 安装 HHVM
 
-Refer to [our directions on installing a prebuilt package](../installation/introduction.md#prebuilt-packages).
+请参阅[我们关于安装预编译包的说明](../installation/introduction.md#prebuilt-packages).
 
-It is of course possible to [build HHVM from source](../installation/building-from-source.md), but this is much more complicated and time consuming. For this reason, building from source isn't recommended until you get a basic install working and have a better feel for what you're doing.
+你也可以选择[采用源码编译 HHVM](../installation/building-from-source.md)，不过会比较复杂且费时，因此，除非你已经熟悉 HHVM 了且你有特殊的需求，否则我们不推荐你采用源码编译的方式来装
 
-## Test HHVM
+## 测试 HHVM
 
-After installing HHVM, change to the directory where your code lives, and start up HHVM:
+安装完 HHVM 之后，切换到你项目的代码目录，然后启动 HHVM：
 
 ```
 hhvm -m server -p 8080
 ```
 
-`-m` represents the [mode](../basic-usage/introduction.md) and here indicates that HHVM is running in HTTP server mode.
+`-m` 表示[工作模式](../basic-usage/introduction.md)，这里我们指定 HHVM 以 HTTP server 的模式来启动
 
-`-p` configures the TCP port that HHVM uses to listen to HTTP requests. The default port is 80, the standard HTTP port. However, that port requires root access, so for this example, we will use port 8080.
+`-p` 指定 HHVM 在 HTTP 模式下监听的 TCP 请求端口，默认是标准 HTTP 端口 80，不过由于 80 端口需要有管理员权限才能监听，因此在这个例子中，我们监听 8080 端口
 
-Once you have HHVM running, write a simple "Hello World" program named `hello.hack`:
+当你的 HHVM 启动起来之后，咱们来写下第一个 "Hello World" 程序，命名为 `hello.hack`：
 
 ```
 <<__EntryPoint>>
@@ -36,22 +36,26 @@ function main(): void {
 }
 ```
 
-Save this `hello.hack` in the same directory that you ran the `hhvm` command from above. Then, load [http://localhost:8080/hello.hack](http://localhost:8080/hello.hack) in your browser and verify you see "Hello World!" appear.
+保存 `hello.hack` 到刚刚执行 `hhvm` 命令的工作目录，然后用浏览器访问 [http://localhost:8080/hello.hack](http://localhost:8080/hello.hack) ，你就可以看到 “Hello World!” 了
 
-## Configure HHVM
+## 配置 HHVM
 
-The out-of-the-box HHVM configuration won't need tweaking by most new users. Notably, the JIT compiler that gives HHVM its speed is on by default. If you want to take a look at the configuration used, it's at `/etc/hhvm/php.ini` in Linux distros and `/usr/local/etc/hhvm/php.ini` in MacOS.
+HHVM 的配置是开箱即用的，一般来说你不需要去修改它的配置。需要注意的是，给 HHVM 加速的 JIT 编译器默认是开启的。如果你想查看已有配置，Linux 请查看 `/etc/hhvm/php.ini`，macOS 请查看 `/usr/local/etc/hhvm/php.ini`
 
-Running HHVM automatically at boot as a service (instead of just on the command line as above) unfortunately does require some configuration. See the [proxygen documentation](../basic-usage/proxygen) for details.
+当你将 HHVM 设置为开机自启的服务而不是像上面这样通过终端模拟器启动时，你就需要专门做一些配置了，具体请查看[proxygen 文档](../basic-usage/proxygen)
 
-## Running Hack files
+## 运行 Hack 代码文件
 
-HHVM runs [Hack](/hack/getting-started/getting-started) code. Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous [additional language features](/hack/). We created a simple Hack program above when testing HHVM.
+[Hack](/hack/getting-started/getting-started) 是 Facebook 发明的一门编程语言，它基于 PHP 的语法，提供了类型检查等[众多语言特性](/hack/)，HHVM 是可以运行 Hack 代码的，比如说上面用来测试 HHVM 的 Hello world 程序
 
-To test and run a Hack file, make sure you are running the `hh_client` typechecker; otherwise you'll be missing out on a lot of your type errors in your Hack code.
+在测试和执行 Hack 文件之前，确保你已经用 `hh_client` 检查过你的代码文件了，否则你将可能会得到一堆类型错误提示
 
-## Learning Hack and PHP
+## 学习 Hack 和 PHP
 
-Learning to program in PHP or Hack is beyond the scope of this guide. The best resource for doing so is the [official Hack documentation](/hack/getting-started/getting-started) and we highly recommend the [O'Reilly book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team at Facebook.
+学习 PHP 和 Hack 编程语言超出了本指南的范围，如果你想认真地学习，那么最佳的资料就是[官方 Hack 文档](/hack/getting-started/getting-started)，还有非常推荐一本由 Facebook HHVM 团队的工程师编写的书[《O'Reilly book on HHVM and Hack》](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/)
 
-For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online.
+关于 PHP 的资料，请查阅[PHP 官方文档](http://docs.php.net/manual/zh/getting-started.php)，上面有很详尽的关于 PHP 的介绍以及大量代码示例
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
