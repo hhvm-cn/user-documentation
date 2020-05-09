@@ -14,8 +14,8 @@ install:
 - docker pull hhvm/hhvm:$HHVM_VERSION
 - docker pull hhvm/hhvm-proxygen:$HHVM_VERSION
 script:
-- docker build -t hhvm/user-documentation:scratch -f .deploy/built-site.Dockerfile .
-- docker run --rm -w /var/www hhvm/user-documentation:scratch ./.travis-test.sh
+- docker build -t hhvmcn/user-documentation:scratch -f .deploy/built-site.Dockerfile .
+- docker run --rm -w /var/www hhvmcn/user-documentation:scratch ./.travis-test.sh
 deploy:
   provider: script
   script: "./.travis-deploy.sh"

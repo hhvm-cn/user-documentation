@@ -8,7 +8,7 @@ fi
 DEPLOY_REV=$(git rev-parse --short HEAD)
 HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
 IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
-IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
+IMAGE_NAME=hhvmcn/user-documentation:$IMAGE_TAG
 
 echo "** Building repo..."
 if [ "$(uname -s)" == "Darwin" ]; then
@@ -20,7 +20,7 @@ fi
 docker run --rm \
   -v "$REPO_OUT:/var/out"  \
   -w /var/www \
-  hhvm/user-documentation:scratch \
+  hhvmcn/user-documentation:scratch \
   .deploy/build-repo.sh
 
 echo "** Building Docker image..."
@@ -45,9 +45,9 @@ echo "** Logging in to dockerhub..."
 echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USER}" \
   --password-stdin
 echo "** Pushing image to DockerHub..."
-docker tag $IMAGE_NAME hhvm/user-documentation:latest
+docker tag $IMAGE_NAME hhvmcn/user-documentation:latest
 docker push "$IMAGE_NAME"
-docker push "hhvm/user-documentation:latest"
+docker push "hhvmcn/user-documentation:latest"
 
 echo "** Setting up ElasticBeanstalk..."
 # Select an application to use: 1) hhvm-hack-docs
@@ -56,7 +56,7 @@ echo "** Setting up ElasticBeanstalk..."
 echo -e "1\n1\nn\n" | eb init -r us-west-2
 
 echo "** Updating AWS config"
-sed -E 's,"hhvm/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
+sed -E 's,"hhvmcn/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
   Dockerrun.aws.json.in > Dockerrun.aws.json
 
 echo "** Identifying environments"
@@ -75,7 +75,7 @@ echo "** Running test suite against staging:"
 docker run --rm \
   -w /var/www \
   -e REMOTE_TEST_HOST=staging.docs.hhvm.com \
-  hhvm/user-documentation:scratch \
+  hhvmcn/user-documentation:scratch \
   vendor/bin/hacktest \
   --filter-groups remote \
  tests/
