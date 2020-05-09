@@ -48,36 +48,3 @@ echo "** Pushing image to DockerHub..."
 docker tag $IMAGE_NAME hhvmcn/user-documentation:latest
 docker push "$IMAGE_NAME"
 docker push "hhvmcn/user-documentation:latest"
-
-echo "** Setting up ElasticBeanstalk..."
-# Select an application to use: 1) hhvm-hack-docs
-# Select the default environment: 1) ... doesn't matter, managed by script
-# Do you want to continue with CodeCommit? n
-echo -e "1\n1\nn\n" | eb init -r us-west-2
-
-echo "** Updating AWS config"
-sed -E 's,"hhvmcn/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
-  Dockerrun.aws.json.in > Dockerrun.aws.json
-
-echo "** Identifying environments"
-if eb status hhvm-hack-docs-a | grep -q 'CNAME: hhvm-hack-docs-staging.elasticbeanstalk.com'; then
-  STAGING_ENV=hhvm-hack-docs-a
-else
-  STAGING_ENV=hhvm-hack-docs-b
-fi
-
-echo "** About to deploy to $STAGING_ENV"
-eb status $STAGING_ENV
-DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
-echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE"
-eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
-echo "** Running test suite against staging:"
-docker run --rm \
-  -w /var/www \
-  -e REMOTE_TEST_HOST=staging.docs.hhvm.com \
-  hhvmcn/user-documentation:scratch \
-  vendor/bin/hacktest \
-  --filter-groups remote \
- tests/
-echo "** Swapping prod and staging..."
-eb swap
