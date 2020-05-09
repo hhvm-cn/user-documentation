@@ -1,1 +1,0 @@
-Fatal error: Class 'Hack\UserDocumentation\Classes\TIR\Examples\TraitReqBad\Paper' required to extend class 'Hack\UserDocumentation\Classes\TIR\Examples\TraitReqBad\Machine' by trait 'Hack\UserDocumentation\Classes\TIR\Examples\TraitReqBad\Plane' in %s/trait-bad.php.type-errors on line 30
