@@ -1,1 +1,1 @@
-How to install HHVM on a supported platform.
+在受支持的平台安装 HHVM。
