@@ -1,11 +1,10 @@
-We support x86_64 Linux, and offer prebuilt packages on variety of Ubuntu and
-Debian platforms.
+官方支持 x86_64 的 Linux 平台，同时为 Ubuntu 和 Debian 提供了安装包。
 
-While you can [build from source](/hhvm/installation/building-from-source), it is generally advisable for ease of installation and stability to use a prebuilt package.
+你也可以[自行编译](/hhvm/installation/building-from-source)，但官方再次提醒，最简单最稳定的做法就是安装官方提供的二进制包。
 
-These instructions require root; use `su -` or `sudo -i` to get a root shell first.
+以下步骤可能需要 root 权限，请先通过 `su -` 或者 `sudo -i` 来获取 root 权限。
 
-## Obtaining The Latest Stable Version
+## 获取最新稳定版
 
 ### Ubuntu
 
@@ -31,56 +30,56 @@ apt-get update
 apt-get install hhvm
 ```
 
-## Obtaining A Specific Release
+## 获取特定的版本
 
-It is generally recommended to follow the newest version possible, provided your codebase is compatible with that version. You can fetch all supported versions (except for HHVM 3.30) by adding that version to `/etc/apt/sources.list`. The syntax you need is:
+如果你的代码兼容最新版，最好还是安装最新的版本。你可以通过往 `/etc/apt/sources.list` 添加源的方式来安装任何受支持的版本（除了 HHVM 3.30），具体操作如下：
 
 `apt-add-repository "deb https://dl.hhvm.com/<%operating system%> <%operating system version%>-<%major%>.<%minor%> main"`
 
-So in order to get HHVM 4.8 on ubuntu bionic (18.04) you would use
+例如你想在 Ubuntu Bionic (18.04) 上安装 HHVM 4.8：
 `apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-4.8 main"`
 
-You will automatically receive patches such as HHVM 4.8.1, but you won't be upgraded to HHVM 4.9 and up.
+之后你可以获取到诸如 HHVM 4.8.1 的更新补丁，但不会更新到 HHVM 4.9 或者是更高的版本。
 
-In order to get HHVM 3.30 LTS use:
+安装 HHVM 3.30 LTS 的操作如下：
 `apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-lts-3.30 main"`
-This is how LTS releases were previously released.
+这就是以前发布LTS版本的方式。
 
-## Choosing A Version
+## 如何选择 HHVM 的版本
 
-If you are working on a new project, you can install the [latest stable version](#Obtaining-The-Latest-Stable-Version).
+如果是新项目，那么直接安装[最新稳定版](#获取最新稳定版)。
 
-If you have an existing project, you can upgrade one release at a time using the [blog](//hhvm.com/blog) to read up on breaking changes.
+如果是已有项目，你可以根据[HHVM博客](//hhvm-cn.com/blog)中的重大更新说明来更新到一个较新的 HHVM 版本。
 
-If you are inheriting a project and you don't know what version it was written against, check the composer.json file. This file is usually found at the root of a project (right next to .hhconfig). This file ought to include a version requirement like `"hhvm": "^4.8"`. If not, check the last time a commit was made and find what HHVM version was recent at that time using the [blog](//hhvm.com/blog).
+如果是你刚接手的项目，你不知道它之前是基于哪个版本开发的，你可以查看 composer.json 中的相关信息，composer.json 通常放在项目根目录（跟 .hhconfig 同级），它一般会包含类似 `"hhvm": "^4.8"` 的项，这就是这个项目要求的 HHVM 的版本。如果找不到 composer.json 这个文件或者文件中没有相关信息，那你可以查看最近的 git 提交时间，然后到[HHVM博客](//hhvm-cn.com/blog)中去找最接近这个时间点发布的版本。
 
-Whatever you do, please make sure that your chosen HHVM version is receiving security updates. The [blog](//hhvm.com/blog) will inform you on what versions supported.
+请记住一点，无论如何都应该确保你选择的是仍然能够接收到安全补丁的版本，同样的，[HHVM博客](//hhvm-cn.com/blog)会告诉你哪些版本是还在受官方更新支持的。
 
-## Other Packages
+## 其他包
 
-The above commands all install the standard `hhvm` package, which is the stable, release configuration. We have a few other packages available in the repo as well:
+上面的命令安装的是稳定、带有正式版配置的标准版 `HHVM`，你还可以通过以下命令来安装其他版本：
 
 ```
-# Stable debug build that is suitable for debuggers like gdb
+# 带有类似于 gdb 等调试器的稳定调试版
 apt-get install hhvm-dbg
 
-# Stable developer package that contains the headers so you can create extensions, etc.
+# 包含有头文件的稳定开发版（如果你在编写扩展，请安装这个版本）
 apt-get install hhvm-dev
 
-# Nightly build (Living on the edge, rebuilt everyday, possibly unstable)
+# Nightly build（尝鲜版，每天都会打包，不稳定）
 apt-get install hhvm-nightly
 
-# Nightly debug build
+# Nightly debug build（尝鲜调试版）
 apt-get install hhvm-nightly-dbg
 
-# Nightly developer build
+# Nightly developer build（尝鲜开发版）
 apt-get install hhvm-dev-nightly
 
 ```
 
-## GPG Key Installation: Alternative Method
+## GPG 密钥安装：替代方法
 
-If you encounter issues with the `apt-key adv` command, an alternative is:
+如果你使用 `apt-key adv` 时遇到问题，可以尝试以下方法：
 
 ```
 apt-get install -y curl
@@ -88,7 +87,7 @@ curl https://dl.hhvm.com/conf/hhvm.gpg.key | apt-key add -
 apt-key finger 'opensource+hhvm@fb.com'
 ```
 
-The 'fingerprint' shown by `apt-key finger` (the second line) should exactly match `0583 41C6 8FC8 DE60 17D7  75A1 B411 2585 D386 EB94`; for example:
+请对比在执行 `apt-key finger` 之后输出的“指纹”，应该要一字不差得对上 `0583 41C6 8FC8 DE60 17D7  75A1 B411 2585 D386 EB94`，举个例子：
 
 ```
 $ apt-key finger 'opensource+hhvm@fb.com'
@@ -97,11 +96,11 @@ pub   rsa4096 2017-11-03 [SC]
 uid           [ unknown] HHVM Package Signing <opensource+hhvm@fb.com>
 ```
 
-If this is not the case, run `apt-key list`, then use `apt-key del` to remove any keys you don't recognize.
+如果不是这种情况，请执行 `apt-key list`，然后用 `apt-key del` 删除所有您不认识的密钥。
 
-## Mirrors
+## 镜像
 
-dl.hhvm.com is fronted by a global CDN, so should be fast for all users. If you wish to maintain a local mirror, you can use AWS CLI utilities to sync:
+官方为 dl.hhvm.com 架设了全球 CDN，因此对所有用户来说应该都很快。如果你希望维护本地镜像，可以使用 AWS CLI 实用程序进行同步：
 
 ```
 aws s3 sync \
@@ -112,7 +111,4 @@ aws s3 sync \
   --exclude '*index.html'
 ```
 
-Additionally, the [Oregon State University Open Source Lab](https://osuosl.org) maintain a mirror, available
-via HTTP, FTP, and rsync, at https://ftp.osuosl.org/pub/hiphop/.
-
-The OSUOSL mirror has limited retention of nightly builds.
+[俄勒冈州立大学开放源实验室]（https://osuosl.org）维护了一个可用的镜像，你可以通过 HTTP/FTP/rsync 来访问它，网址：https://ftp.osuosl.org/pub/hiphop/ 。另外，它们只保留部分 nightly build。
