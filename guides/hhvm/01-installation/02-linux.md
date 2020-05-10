@@ -112,3 +112,7 @@ aws s3 sync \
 ```
 
 [俄勒冈州立大学开放源实验室]（https://osuosl.org）维护了一个可用的镜像，你可以通过 HTTP/FTP/rsync 来访问它，网址：https://ftp.osuosl.org/pub/hiphop/ 。另外，它们只保留部分 nightly build。
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
