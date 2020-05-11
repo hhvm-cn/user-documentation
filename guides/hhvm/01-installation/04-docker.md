@@ -57,7 +57,7 @@ Checkout the setup for this docsite on [github](https://github.com/hhvm/user-doc
 
 这样做可以避免以下问题：
  - 泄漏配置文件中的敏感信息，例如数据库密码等
- - [因为 .git 或者 .hg 目录]((http://www.jamiembrown.com/blog/one-in-every-600-websites-has-git-exposed/))意外泄漏源码（包含历史版本信息）
+ - 因为 .git 或者 .hg 目录意外泄漏源码（包含历史版本信息）
  - 暴露不应该被远程执行的可执行脚本，例如 `bin/` 目录中的脚本
  - 暴露 `vendor/` 中的依赖，哪怕你的应用代码是安全的
 
