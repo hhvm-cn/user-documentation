@@ -1,18 +1,15 @@
-Since HHVM 4.2, we aim to release a new release weekly, promoting a recent
-nightly build. The majority of releases are supported for 6 weeks.
+自 HHVM 4.2 期，我们的目标是每周都发布一个新版本，以促进最近的每夜发布。大多数版本的支持周期为 6 周。
 
-## Long Term Support
+## 长期支持
 
-Every 24 weeks (roughly twice a year), a release has "long term support" for
-roughly 48 weeks - until two more LTS releases have been made. If the release
-due at that time is delayed, support is extended.
+每 24 周（大概每年两次）会发布一个“长期支持”版本，这个版本会有大概 48 周的支持（直到又发布两个 LTS 版本）。如果发布延迟了，支持时间也会相应地延期。
 
-As of Decemeber 2019, the current LTS releases are:
+截止至 2019.12， LTS 版本为：
 
-- HHVM 4.8
-- HHVM 4.32
+ - HHVM 4.8
+ - HHVM 4.32
 
-The following releases are expected to be LTS releases:
+下面两个版本是计划中的 LTS：
 
-- HHVM 4.56 (release marks end of support for 4.8)
-- HHVM 4.80 (release marks end of support for 4.32)
+ - HHVM 4.56 （发布时结束对 4.8 的支持）
+ - HHVM 4.80 （发布时结束对 4.32 的支持）
