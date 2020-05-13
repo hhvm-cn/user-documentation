@@ -1,14 +1,18 @@
-After [installing](../installation/introduction.md), you are ready to start using HHVM.
+[安装](../installation/introduction.md)完成之后，你离启动 HHVM 只有一步之遥。
 
-For a majority of cases, you will run HHVM in one of two different ways:
+通常情况下，你会有两种不同的运行 HHVM 的模式：
 
-* In [command-line](./command-line.md) mode to run standalone scripts.
-* In [server](./server.md) mode, where HHVM will serve web requests from users.
+* [CLI（命令行）](./command-line.md) 模式，执行一些独立的脚本。 
+* [server](./server.md) 模式，用 HHVM 来处理用户的 web 请求。
 
-## Default Configuration
+## 默认配置
 
-The default configuration for HHVM is `php.ini` for command-line mode and `server.ini` for server mode (both normally found in `/etc/hhvm/` on [Linux](../installation/linux.md) distros)
+HHVM 的默认配置分为 CLI 模式的 `php.ini`和 server 模式的 `server.ini`（在 Linux 环境下，这两个文件一般会在 `/etc/hhvm` 里）
 
-The default configurations will be sufficient for a majority of use cases. Thus, you most likely will not need to tweak these INI settings, etc. They will be loaded automatically when you start HHVM.
+默认配置已经可以满足大多数场景的需求了，所以一般来说你不需要去调整 INI 设置，当你启动 HHVM 的时候，相应的配置会自动加载进来。
 
-However, HHVM does allow you to adjust [configuration options](../configuration/introduction.md) to your liking.
+当你对 HHVM 已经熟悉了或者你有特别的需求，你可以按照你的情况去调整[配置选项](../configuration/introduction.md)
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
