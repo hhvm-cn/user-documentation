@@ -1,1 +1,1 @@
-The built in and dynamic extensions that HHVM currently supports.
+HHVM 现有内置扩展列表。

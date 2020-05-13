@@ -1,1 +1,1 @@
-Advanced usage, with more ways to run and configure HHVM.
+高级用法，你可以定制更详尽的配置来运行 HHVM。
