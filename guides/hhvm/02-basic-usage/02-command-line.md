@@ -1,17 +1,23 @@
-In command-line (cli) mode, you run the `hhvm` binary from the command-line, execute the script and then exit HHVM immediately when the script completes.
+在 CLI 模式下，你将从“命令行”启动 HHVM 来执行你的脚本，当你的脚本运行完之后，HHVM 会立即退出。
 
-Here is an example of how to run a script in HHVM cli mode. Take the following PHP script:
+下面是一个从命令行启动 HHVM 来执行 PHP 文件的例子：
 
 @@ command-line-examples/fib.php @@
 
-At the command-line, you would execute the script as follows:
+在命令行中，执行如下命令：
 
 ```
 % hhvm /path/to/fib.php 10
 ```
 
-You specify the `hhvm` binary, the path to `fib.php` and an argument to the script (arguments to scripts do not exist in all cases, of course).
+你需要给出 `hhvm` 可执行程序、`fib.php` 的路径，以及 `fib.php` 接收的参数（当然，不是所有脚本都需要给定参数的）。
+
+然后你就可以看到如下输出：
 
 ```
 The 10 number in fibonacci is: 55
 ```
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
