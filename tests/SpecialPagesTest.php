@@ -48,10 +48,10 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
         '/hack/getting-started/getting-started',
       ),
       'Beta redirect root' =>
-        tuple('http://beta.docs.hhvm.com/', 'http://docs.hhvm.com/'),
+        tuple('http://beta.docs.hhvm.com/', 'https://docs.hhvm-cn.com/'),
       'Beta redirect page' => tuple(
         'http://beta.docs.hhvm.com/hack/reference/',
-        'http://docs.hhvm.com/hack/reference/',
+        'https://docs.hhvm-cn.com/hack/reference/',
       ),
       'Old Hack collection class overview' => tuple(
         '/manual/en/hack.collections.vector.php',

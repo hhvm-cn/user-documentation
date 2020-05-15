@@ -10,7 +10,7 @@ class RobotsTxtTest extends \Facebook\HackTest\HackTest {
   <<TestGroup('remote')>>
   public async function testMainDomainAllowsCrawling(): Awaitable<void> {
     list($_, $body) = await PageLoader::getPageAsync(
-      'http://docs.hhvm.com/robots.txt',
+      'https://docs.hhvm-cn.com/robots.txt',
     );
     expect($body)->toBeSame(
       \file_get_contents(RobotsTxtController::DEFAULT_FILE),

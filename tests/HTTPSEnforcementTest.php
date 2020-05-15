@@ -14,7 +14,7 @@ final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
   }
 
   public function httpsDomains(): vec<(string)> {
-    return vec[tuple('docs.hhvm.com'), tuple('staging.docs.hhvm.com')];
+    return vec[tuple('docs.hhvm-cn.com'), tuple('staging.docs.hhvm.com')];
   }
 
   <<DataProvider('httpsDomains'), TestGroup('remote')>>
@@ -38,7 +38,7 @@ final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
   <<TestGroup('remote')>>
   public async function testNotEnforcedOnRobotsTxt(): Awaitable<void> {
     list($response, $_) = await PageLoader::getPageAsync(
-      'http://docs.hhvm.com/robots.txt',
+      'https://docs.hhvm-cn.com/robots.txt',
     );
     expect($response->getStatusCode())->toBeSame(200);
   }
@@ -46,7 +46,7 @@ final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
   <<TestGroup('remote')>>
   public async function test404Status(): Awaitable<void> {
     list($response, $_) = await PageLoader::getPageAsync(
-      'http://docs.hhvm.com/__idonotexist_fortesting',
+      'https://docs.hhvm-cn.com/__idonotexist_fortesting',
     );
     expect($response->getStatusCode())->toBeSame(404);
   }

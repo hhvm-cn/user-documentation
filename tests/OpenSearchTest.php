@@ -18,7 +18,7 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
   <<TestGroup('remote')>>
   public async function testOpenSearchOnProd(): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync(
-      'https://docs.hhvm.com/',
+      'https://docs.hhvm-cn.com/',
     );
     expect($response->getStatusCode())->toBeSame(200);
     expect($body)->toContainSubstring('application/opensearchdescription+xml');
