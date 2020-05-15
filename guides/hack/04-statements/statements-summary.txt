@@ -1,1 +1,1 @@
-Simple statements, blocks, and loops.
+简单的语句、代码块和循环。

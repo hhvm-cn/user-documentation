@@ -1,1 +1,1 @@
-Installing Hack, running your first program, and introducing the tools.
+教你如何安装 Hack 来运行你的第一个程序，同时也会介绍一些工具。

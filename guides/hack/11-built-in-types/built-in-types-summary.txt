@@ -1,1 +1,1 @@
-Built-in types known to the type checker.
+类型检查器支持的原生数据类型。

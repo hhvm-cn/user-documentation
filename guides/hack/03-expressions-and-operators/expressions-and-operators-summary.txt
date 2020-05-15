@@ -1,1 +1,1 @@
-Expressions, operators, associativity, and precedence.
+表达式、运算符、关联性和优先级。

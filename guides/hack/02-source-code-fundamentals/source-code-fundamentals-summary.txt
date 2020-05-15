@@ -1,1 +1,1 @@
-Basic syntax, namespaces, and the autoloader.
+基础语法、命名空间、自动加载。

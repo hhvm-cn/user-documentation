@@ -29,7 +29,7 @@ Check out the [source code](https://github.com/hhvm/user-documentation/tree/mast
 如果你只是想快速地在本地搭建一个文档，你可以按如下步骤操作：
 
 1. 安装 [Docker](https://docs.docker.com/engine/installation/)
-2. 在终端执行 `docker run -p 8080:80 -d hhvm/user-documentation` 启动一个容器（这个时候你会看到终端输出了一个容器 ID）
+2. 在终端执行 `docker run -p 8080:80 -d hhvmcn/user-documentation` 启动一个容器（这个时候你会看到终端输出了一个容器 ID）
 3. 用浏览器访问 `http://localhost:8080`，就可以看到 HHVM/Hack 的（英文）文档了
 4. 如果想停止容器，请在终端执行 `docker stop 第二步得到的容器ID`；如果你忘了复制第二步输出的容器ID，你可以执行 `docker ps` 来获取容器的名称或者ID，然后再执行 `docker stop 容器名称/容器ID`
 
@@ -37,7 +37,7 @@ Check out the [source code](https://github.com/hhvm/user-documentation/tree/mast
 
 如果你想要在本地构建文档（例如预览你翻译的文档），你需要安装 PHP 7.0+/Composer 和 hhvm-4.52（本仓库从 Facebook 官方仓库 fork 出来时只能在 hhvm-4.52 下能构建成功）。
 
-These are the basic step-by-step instructions to get you up and running. It assumes certain packages are installed on your system. Click [here](installation-detailed.md) for detailed installation information.
+下面是很简易的教程，我们假定你已经安装好了相应的环境。点击[这里](installation-detailed.md)查看详细的安装文档。
 
 当你安装好环境之后，按如下步骤即可在本地构建文档：
 
