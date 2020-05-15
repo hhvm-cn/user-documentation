@@ -27,7 +27,7 @@ final class RobotsTxtController
   public async function getResponseAsync(
     ResponseInterface $response,
   ): Awaitable<ResponseInterface> {
-    if ($this->getRequestedHost() === 'docs.hhvm.com') {
+    if ($this->getRequestedHost() === 'docs.hhvm-cn.com') {
       $source = self::DEFAULT_FILE;
     } else {
       $source = self::DO_NOT_CRAWL_FILE;
