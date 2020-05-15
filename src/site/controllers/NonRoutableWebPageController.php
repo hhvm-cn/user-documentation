@@ -82,11 +82,11 @@ EOF;
     switch ($this->getRequestedHost()) {
       case 'beta.docs.hhvm.com':
         throw new RedirectException(
-          'http://docs.hhvm.com'.$this->getRequestedPath(),
+          'https://docs.hhvm-cn.com'.$this->getRequestedPath(),
         );
-      case 'docs.hhvm.com':
+      case 'docs.hhvm-cn.com':
         $google_analytics =
-          <script:google-analytics trackingID="UA-49208336-3" />;
+          <script:google-analytics trackingID="UA-166019294-3" />;
         $open_search =
           <link
             rel="search"
@@ -271,7 +271,7 @@ EOF;
               issueBody={$this->getGithubIssueBody()}
               controller={static::class}>
               <ui:glyph icon={UIGlyphIcon::BUG} />
-              report a problem or make a suggestion
+              报告 bug 或提出建议。
             </github-issue-link>
           </div>
           <search-bar
@@ -306,7 +306,7 @@ EOF;
               issueTitle={$this->getGithubIssueTitle()}
               issueBody={$this->getGithubIssueBody()}
               controller={static::class}>
-              Report a problem or make a suggestion.
+              报告 bug 或提出建议。
             </github-issue-link>
           </span>
         </ui:button>
@@ -321,26 +321,25 @@ EOF;
           <div class="footerPanel">
             <h2>Hack</h2>
             <ul>
-              <li><a href="/hack/overview/">Overview</a></li>
-              <li><a href="/hack/getting-started/">Getting Started</a></li>
-              <li><a href="/hack/tools/">Tools</a></li>
-              <li><a href="/hack/reference/">API Reference</a></li>
+              <li><a href="/hack/overview/">概览</a></li>
+              <li><a href="/hack/getting-started/">开始使用</a></li>
+              <li><a href="/hack/tools/">工具</a></li>
+              <li><a href="/hack/reference/">API</a></li>
             </ul>
           </div>
           <div class="footerPanel">
             <h2>HHVM</h2>
             <ul>
-              <li><a href="/hhvm/getting-started/">Getting Started</a></li>
-              <li><a href="/hhvm/installation/">Installation</a></li>
-              <li><a href="/hhvm/basic-usage/">Basic Usage</a></li>
-              <li><a href="/hhvm/configuration/">Configuration</a></li>
+              <li><a href="/hhvm/getting-started/">开始使用</a></li>
+              <li><a href="/hhvm/installation/">安装</a></li>
+              <li><a href="/hhvm/basic-usage/">基础用法</a></li>
+              <li><a href="/hhvm/configuration/">配置</a></li>
             </ul>
           </div>
           <div class="footerPanel">
-            <h2>Hack Community</h2>
+            <h2>Hack 中文社区</h2>
             <ul>
-              <li><a href="http://hacklang.org/">Website</a></li>
-              <li><a href="https://twitter.com/hacklang">Twitter</a></li>
+              <li><a href="https://hacklang-cn.org/">网站</a></li>
               <li>
                 <a
                   href="https://github.com/facebook/hhvm/tree/master/hphp/hack">
@@ -348,19 +347,17 @@ EOF;
                 </a>
               </li>
               <li>
-                <a href="https://github.com/hhvm/user-documentation">
+                <a href="https://github.com/hhvm-cn/user-documentation">
                   Docs on GitHub
                 </a>
               </li>
             </ul>
           </div>
           <div class="footerPanel">
-            <h2>HHVM Community</h2>
+            <h2>HHVM 中文社区</h2>
             <ul>
-              <li><a href="http://hhvm.com">Website</a></li>
-              <li><a href="http://hhvm.com/blog">Blog</a></li>
-              <li><a href="https://www.facebook.com/hhvm">Facebook</a></li>
-              <li><a href="https://twitter.com/HipHopVM">Twitter</a></li>
+              <li><a href="https://hhvm-cn.com">网站</a></li>
+              <li><a href="https://hhvm-cn.com/blog">博客</a></li>
             </ul>
           </div>
         </div>

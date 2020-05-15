@@ -35,7 +35,7 @@ final class :github-issue-link extends :x:element {
 
     $new_issue_prefill_url = sprintf(
       '%s?title=%s&body=%s',
-      'https://github.com/hhvm/user-documentation/issues/new',
+      'https://github.com/hhvm-cn/user-documentation/issues/new',
       urlencode($this->:issueTitle ?? ''),
       urlencode($body),
     );
@@ -50,7 +50,7 @@ final class :github-issue-link extends :x:element {
   private function getMetadataForBody(): string {
     $build_id = LocalConfig::getBuildID();
     $request_time = (new DateTime())
-      ->setTimezone(new DateTimeZone('Etc/UTC'))
+      ->setTimezone(new DateTimeZone('Asia/Shanghai'))
       ->format(DateTime::RFC2822);
     $request_path = $this->getRequest()->getUri()->getPath();
 
