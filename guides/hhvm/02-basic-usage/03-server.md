@@ -1,46 +1,50 @@
-Server mode is how you will use HHVM to serve web requests. The HHVM process starts up and continuously waits to serve web requests.
+server 模式是给你提供 web 请求处理的一种方式，HHVM 进程启动之后会持续地监听并处理 web 请求。
 
-Multiple requests can, of course, be served simultaneously, and HHVM also caches code to be shared across requests as well.
+当然了，HHVM 是可以同时处理并发请求的，并且 HHVM 会缓存你的代码，不同的请求都可以共享到这个缓存。
 
-Here is the simplest way to run HHVM in server mode.
+下面是启动 HHVM server 模式最简单的例子。
 
 ```
 % hhvm -m server -p 8080
 ```
 
-`-m` is the `mode` option; the default is [command-line](./command-line.md).
+`-m` 是 `模式` 选项，默认是 [命令行模式](./command-line.md)。
 
-`-p` is the port where HHVM will listen for requests. The default is 80.
+`-p` 是 HHVM 监听的端口，默认是 80。
 
-And the root for your program files will be the current directory from where you launched the `hhvm` command above.
+你执行 `hhvm` 命令的目录将会作为你代码文件的根目录。
 
-## Configuration Overrides
+## 自定义配置
 
-`-d` specifies command-line [configuration](../configuration/introduction.md) overrides.
+`-d` 可以覆盖命令行[配置](../configuration/introduction.md)中的选项
 
-In our example above, we are using the default HHVM built-in [proxygen](./proxygen.md) web server on port 8080.
+在上面的例子中，默认使用的是 HHVM 内置的 [proxygen](./proxygen.md) 作为 web server 来监听 8080 端口。
 
-We could have removed the `-p 8080` and explicitly appended:
+我们可以删除 `-p 8080` 并显式追加下面的内容到上面的命令：
 
 `-d hhvm.server.type=proxygen -d hhvm.server.port=8080 -d hhvm.server.source_root=./`
 
-to the command above. While this is a more verbose way to accomplish the same command, there might be reasons to be explicit. And, of course, you can change various [other settings](../configuration/introduction.md) with `-d` as well.
+尽管将命令写这么详细实现的目的跟之前一样，但这么做也可能有一定的道理（译者注：比如 ini 里的默认配置被修改过了，你就需要显式指定相应的参数）。除此之外，你也可以用 -d 来自定义其他各种[设置](../configuration/introduction.md)。
 
-HHVM will also use the default INI configuration `server.ini` (normally found in `/etc/hhvm/` in Linux distros and `/usr/local/etc/hhvm/` in MacOS).
+HHVM 也会继续使用 `server.ini` （大多数 Linux 环境中在 `/etc/hhvm/`，macOS 中在 `/usr/local/etc/hhvm/`）中默认的配置。
 
-## Client access to HHVM in server mode
+## 客户端访问 server 模式下的 HHVM
 
-Normally, a web request of the form:
+通常情况下，一个 web 请求是长下面这样的：
 
 ```
 http://your.site:8080/index.php
 ```
 
-You can also use `curl` and other programs to access the HHVM server as well.
+你可以用 `curl` 或者其他程序来访问 HHVM 服务端。
 
 ### Possible Fatal Error
 
-If the code you are running is written in [Hack (<?hh)](/hack/) and you run into a [fatal error regarding not running the typechecker](/hhvm/FAQ/faq#running-code__how-do-i-fix-the-not-running-the-hack-typechecker-fatal-error), then you must do one of the following:
+如果你运行的是 [Hack (<?hh>)](/hack/) 代码，并且你得到了一个 [由于没有运行类型检查器导致的致命错误](/hhvm/FAQ/faq#running-code__how-do-i-fix-the-not-running-the-hack-typechecker-fatal-error)，那你需要做以下的任一操作：
 
-- Create an empty file named `.hhconfig` in the root directory of your source code.
-- Or pass `-d hhvm.hack.lang.look_for_typechecker=0` to the `hhvm -m server...` command you used above.
+- 创建一个名为 `.hhconfig` 的空文件在你的代码根目录中
+- 在 `hhvm -m server...` 命令后面加上 `-d hhvm.hack.lang.look_for_typechecker=0`
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
