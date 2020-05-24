@@ -276,7 +276,7 @@ EOF;
           </div>
           <search-bar
             class="headerElement"
-            placeholder="Search our Documentation"
+            placeholder="搜索文档"
           />
         </div>
       </div>;
@@ -299,7 +299,7 @@ EOF;
   private function getFeedbackFooter(): XHPRoot {
     return
       <div class="footerPanel footerPanelFullWidth">
-        <h2>See something wrong?</h2>
+        <h2>发现错误？</h2>
         <ui:button className="gitHubIssueButton" glyph={UIGlyphIcon::BUG}>
           <span>
             <github-issue-link
