@@ -1,26 +1,27 @@
-## Input and Output
+## 输入/输出
 
-Input and output is an active area of development in Hack; this page describes a proposed standard
-API, with a prototype available in [hsl-experimental], known as "HSL IO".
+输入和输出是 Hack 开发中的活跃领域，本页面介绍了一个标准 API 提议，及其在 [hsl-experimental] 中被称为 “HSL IO” 的原型。
 
 [hsl-experimental]: https://github.com/hhvm/hsl-experimental/
 
-**HSL IO is currently not recommended in CLI server mode**: error handling is based on the `errno` C variable,
-which has unpredictable behavior in CLI server mode.
+**目前不建议在CLI服务器模式下使用 HSL IO**： 因为错误处理基于 C 变量 `errno`，在 CLI 服务器模式下具有不可预测的行为。
 
-HSL IO differs from most other language's standard IO libraries in two particularly significant ways:
-- provide as much safety as possible through the type system instead of runtime checking. For example,
-  files opened read-only are a different type to those opened write-only; read-write files are a supertype
-  of both read-only- and write-only- files.
-- designed primarily for asynchronous IO; blocking operations are not generally exposed.
+HSL IO 在两个特别重要的方面与大多数其他语言的标准 IO 库不同：
+- 通过类型系统而不是运行时检查来提供尽可能多的安全性。例如，以只读方式打开的文件的类型和以只写方式打开的文件的类型不同；以读写方式打开的文件的类型是“只读”和“只写”的超类型。
+- 主要为异步 IO 设计，阻塞操作通常不公开。
 
-Additional design goals include:
-- be internally consistent
-- reduce end-user boilerplate. For example, automatically retry calls that fail with `EAGAIN`
-- make the most obvious way to do things as safe as possible
-- /support/ all reasonable behavior even if unsafe
-- be convenient for common cases, but not at the cost of consistency or safety
+更多的设计理念包括：
+- 内部保持一致
+- 减少终端用户的代码量。例如，当调用遇到 `EAGAIN` 的时候自动重试
+- 用最显而易见的形式来使代码尽可能安全
+- （支持）所有合理的行为，哪怕是不安全的
+- 为常见的场景提供便利，但不以一致性和安全性作为代价
 
-For a more detailed overview, see the documentation for `IO\Handle`; basic operations include:
+更详细的概述，请查阅 `IO\Handle` 的文档。基本的操作包括：
 
 @@ input-and-output-examples/hsl-io-basics.hack @@
+
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
