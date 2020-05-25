@@ -1,30 +1,25 @@
-## Starting A Real Project
+## 项目实战
 
-Real projects generally aren't a single file in isolation; they tend to have
-dependencies such as the [Hack Standard Library], and various optional tools.
+实际项目往往不会只有一个独立的文件，而是会依赖于各种库或包，例如[Hack 标准库]或者是其他一些可选的工具。
 
-A good starting point is to:
-- [install Composer]
-- create an empty `.hhconfig` file
-- create `src/` and `tests/` subdirectories
-- configure autoloading
-- use Composer to install the common dependencies and tools
+一个良好的项目应该是这样启动的：
+- [安装 Composer]
+- 创建一个空白的 `.hhconfig` 文件
+- 创建 `src/` 和 `tests/` 子目录
+- 配置自动加载
+- 使用 Composer 来安装公共依赖和工具
 
-### Autoloading
+### 自动加载
 
-In HHVM, there is no 'build' step as such; each file is processed as needed.
-Currently, HHVM needs to be given a map of what files define which classes,
-functions and so on - for example, to execute the code `new Foo()`, HHVM needs
-to know that the class `Foo` is defined in `src/Foo.hack`.
+在 HHVM 中是没有“编译”这个步骤的，每个文件都是按需执行。当前，我们需要为 HHVM 提供哪个文件定义了哪些类/函数等的映射关系，例如，当执行代码 `new Foo()` 的时候，HHVM 需要知道 `Foo` 类是定义在 `src/Foo.hack` 的。
 
-[hhvm-autoload] generates this map. To add it to your project, run:
+[hhvm-autoload] 可以生成这种映射关系。你可以通过以下命令将 hhvm-autoload 添加到你的项目中去：
 
 ```
 $ php /path/to/composer.phar require hhvm/hhvm-autoload
 ```
 
-hhvm-autoload needs an `hh_autoload.json` configuration
-file. For most projects, a minimal example is:
+hhvm-autoload 的配置文件是 `hh_autoload.json`。对于大多数项目而言，最简单的配置结构如下：
 
 ```JSON
 {
@@ -38,26 +33,19 @@ file. For most projects, a minimal example is:
 }
 ```
 
-The "roots" key provides folders that need to be loadable in a production environment.
+`roots` 节点指定生产环境中需要加载的目录
 
-The "devRoots" key is for folders that you want to be autoloaded during
-development or testing, but not when you are running your code in production.
+`devRoots` 节点中的是开发和测试环境中需要自动加载的目录，在生产环境中时这些目录不会被加载
 
-The "devFailureHandler" key is the fully qualified name of a fallback strategy.
-When you add a new class or function and don't run `hh-autoload`, the autoloadmap is not automatically updated.
-The fallback is called when hhvm can't find your type, constant or function in the autoloadmap.
+`devFailureHandler` 是后备策略的完全限定名称。当你添加了一个新的类或者函数并且没有执行 `hh-autoload` 时，自动加载映射关系不会被自动更新。HHVM 在自动加载映射中找不到你的类型、常量或者是函数等时，就会调用后备。
 
-The fallback then may attempt to load the type, constant or function at runtime.
-(This process will slow down your execution considerably and should therefore not used in production.)
-Not all contants and functions can / will be found by HHClientFallbackHandler, see the [repository](https://github.com/hhvm/hhvm-autoload) for more details.
+后备会尝试在运行时加载类型、常量或者是函数等等（此过程会大大降低代码执行速度，因此不应该在生产环境中使用它）。同时，不是所有的常量或函数都能/会被 HHClientFallbackHandler 找到，你可以在 [GitHub 仓库](https://github.com/hhvm/hhvm-autoload) 中查阅更多信息。
 
-Once this configuration file is created, `vendor/bin/hh-autoload` can be executed
-to generate or update the map, which is created as `vendor/autoload.hack`
+一旦配置文件创建好，`vendor/bin/hh-autoload` 就可以用来生成或更新映射表并创建 `vendor/autoload.hack`
 
-### An Example
+### 例子
 
-The following sequence of commands could be used to fully initialize a Hack
-project with the most common dependencies:
+按顺序执行以下命令可以完整地初始化一个带有常用依赖的 Hack 项目：
 
 ```
 $ touch .hhconfig
@@ -76,9 +64,9 @@ $ composer require hhvm/hsl hhvm/hhvm-autoload
 $ composer require --dev hhvm/hhast hhvm/hacktest facebook/fbexpect
 ```
 
-You may need to use the full path to Composer, depending on how it's installed.
+由于 Composer 安装方式可能不一样，你在使用 Composer 的时候可能需要使用绝对路径。
 
-The same commands with their expected output:
+以下是同样的命令，以及其输出（译者注：在你的机器上可能会略有不同）：
 
 ```
 $ touch .hhconfig
@@ -126,10 +114,9 @@ Generating autoload files
 $
 ```
 
-### Adding Functions or Classes
+### 添加函数或者类
 
-As a toy example, we're going to create a function that squares a vector of
-numbers; save the following as `src/square_vec.hack`:
+作为一个实验性例子，我们将会创建一个函数，它可以遍历计算数字向量的平方值。保存下面的代码到 `src/square_vec.hack`：
 
 ```Hack
 use namespace HH\Lib\Vec;
@@ -139,7 +126,7 @@ function square_vec(vec<num> $numbers): vec<int> {
 }
 ```
 
-If you then run `hh_client`, it will tell you of a mistake:
+如果你运行 `hh_client`，它会向你报一个错：
 
 ```
 src/square_vec.hack:4:10,57: Invalid return type (Typing[4110])
@@ -148,13 +135,13 @@ src/square_vec.hack:4:10,57: Invalid return type (Typing[4110])
   src/square_vec.hack:3:35,35: Here is why I think the argument is a num: this is a num
 ```
 
-To fix this, change the return type of the function from `vec<int>` to `vec<num>`.
+这时只需要将返回类型由 `vec<int>` 改成 `vec<num>` 即可修复
 
-We now have a function that is valid Hack, but it's not tested, and nothing calls it.
+到此我们就有了一个合法的 Hack 函数，但它没有被测试过，也没有被调用。
 
-### Adding an Executable
+### 添加可执行程序
 
-Save the following as `bin/square_some_things.hack`:
+将下面的代码保存为 `bin/square_some_things.hack`:
 
 ```Hack
 #!/usr/bin/env hhvm
@@ -172,17 +159,14 @@ async function main(): Awaitable<void> {
 }
 ```
 
-This program:
- - requires and initializes the autoloader so that the function we just defined
-   can be found
- - calls the function
- - prints the results
+这段程序：
+ - 载入并初始化了自动加载器，使得上面我们定义的函数可以被加载进来
+ - 调用了之前定义的函数
+ - 打印了函数结果
 
-The `<<__EntryPoint>>` annotation marks this function as the point where
-execution starts - there is nothing special about the function name `main`.
+`<<__EntryPoint>>` 注解将这个函数标记为这段可执行程序在被执行时的入口（函数名 `main` 没有特别之处）。
 
-You can now execute your new program, either explicitly with HHVM, or by
-marking it as executable:
+现在你可以用 HHVM 显式地执行你的新程序，或者将其标记为可执行文件来执行（译者注：在代码文件中的第一行加入 `#!/usr/bin/env hhvm`，这种写法叫做 `Shebang` 或者 `Hashbang`）：
 
 ```
 $ hhvm bin/square_some_things.hack
@@ -202,12 +186,7 @@ $ bin/square_some_things.hack
 
 ### Linting
 
-Most projects use a linter to enforce some stylistic choices that are not
-required by the language, but help make the project consistent; [HHAST] is the
-recommended linter for Hack code. HHAST's linter is enabled by an
-`hhast-lint.json` file in the project root. A good starting project is to enable
-all linters for all directories that contain source code - to do this, save
-the following as `hhast-lint.json`:
+大多数项目都会使用 linter 来执行一些代码风格化，尽管不是语言本身要求的，但这么做可以使得你的代码风格看起来更加一致。[HHAST] 是推荐用于 Hack 代码的 linter。HHAST 的 linter 由项目根目录中的 `hhast-lint.json` 启用。一个好的新项目应该为所有包含代码的目录开启所有 linters。将下面的内容保存为 `hhast-lint.json`：
 
 ```json
 {
@@ -216,8 +195,7 @@ the following as `hhast-lint.json`:
 }
 ```
 
-When you ran `composer require` earlier, HHAST was installed into the `vendor/`
-subdirectory, and can be executed from there:
+在之前执行 `composer require` 的时候，HHAST 已经被安装到 `vendor/` 子目录了，你可以直接执行：
 
 ```
 $ vendor/bin/hhast-lint
@@ -230,10 +208,9 @@ Function "main()" does not match conventions; consider renaming to "main_async"
   >async function main(): Awaitable<void>
 ```
 
-### Unit Testing
+### 单元测试
 
-[HackTest] is used to create unit test classes, and [fbexpect] is used to
-express assertions. Let's create a basic test as `tests/MyTest.hack`:
+[HackTest] 被用于创建单元测试类，而 [fbexpect] 被用于表达断言。我们创建一个基本的测试 `tests/MyTest.hack`：
 
 ```hack
 use function Facebook\FBExpect\expect;
@@ -254,7 +231,7 @@ final class MyTest extends HackTest {
 }
 ```
 
-We can then use HackTest to run the tests:
+然后我们可以用 HackTest 来运行测试：
 
 ```
 $ vendor/bin/hh-autoload
@@ -264,14 +241,9 @@ $ vendor/bin/hacktest tests/
 Summary: 2 test(s), 2 passed, 0 failed, 0 skipped, 0 error(s).
 ```
 
-Regenerating the autoloadmap (with hh-autoload) is not always required,
-but if classes are not in the autoloadmap,
-you may get exceptions about reflected classes not existing.
-It is generally recommended to make sure that the autoloadmap is complete,
-before running the test suite.
+不是所有时候都需要重新生成自动加载映射表（用 hh-autoload），但是如果类在自动加载映射表中找不到时，你可能会得到有关反射类不存在的异常。因此建议在执行测试套件之前，确保自动加载映射表时完整的。
 
-If we intentionally add a failure, such as `tuple(vec[1, 2, 3], vec[1, 2, 3])`,
-HackTest reports this:
+如果我们人为加入一个错误，例如 `tuple(vec[1, 2, 3], vec[1, 2, 3])`，HackTest 会报：
 
 ```
 $ vendor/bin/hacktest tests/
@@ -303,34 +275,25 @@ Failed asserting that vec [
 Summary: 3 test(s), 2 passed, 1 failed, 0 skipped, 0 error(s).
 ```
 
-## Configuring Git
+## 配置 Git
 
-The `vendor/` directory should not be committed; to make dependencies available
-on another system or checkout, use `composer install`. This will use the
-generated `composer.lock` file (which should generally be committed) to install
-the exact same versions.
+`vendor/` 目录不应该提交到 Git；在其他系统或分支，用 `composer install` 来安装依赖。这个操作会使用已经生成好的 `composer.lock` （这个文件应该提交到 Git）来安装相同版本的依赖。
 
 ```
 $ echo vendor/ > .gitignore
 ```
 
-If you're creating a library, users of your library probably don't want your
-unit tests - and if they have them, they will need to have `fbexpect` and
-`hacktest` installed in compatible versions to not get Hack errors.
+如果你编写的是库，那这个库的用户可能不想要你的单元测试，因为如果包含了你的单元测试，他们需要安装兼容版本的 `fbexpect` 和 `hacktest`才不会得到 Hack 报错。
 
-As Composer uses GitHub releases which are automatically generated via
-`git export`, the simplest solution is to configure `git export` to ignore
-the `tests/` directory:
+由于 Composer 使用的 GitHub releases 是由 `git export` 自动打包的，因此最简单的方式就是通过配置 `git export` 来忽略 `tests/` 目录：
 
 ```
 $ echo 'tests/ export-ignore' > .gitattributes
 ```
 
-## Configuring TravisCI
+## 配置 TravisCI
 
-We recommend using Docker on TravisCI for continuous integration of Hack
-projects. This is usually done by creating a separate `.travis.sh` which
-executes in the container. For example, a `.travis.yml` might look like this:
+我们推荐在 TravisCI 上使用 Docker 来对 Hack 项目进行持续集成。我们通常通过创建在容器中单独执行的 `.travis.sh` 来实现。举个例子，一份 `.travis.tml` 大概会长下面这样：
 
 ```
 sudo: required
@@ -345,7 +308,7 @@ script:
 - docker run --rm -w /var/source -v $(pwd):/var/source hhvm/hhvm:$HHVM_VERSION ./.travis.sh
 ```
 
-... and a corresponding `.travis.sh`:
+... 及其对应的 `.travis.sh`:
 
 ```
 #!/bin/sh
@@ -368,14 +331,15 @@ if !(hhvm --version | grep -q -- -dev); then
 fi
 ```
 
-With this configuration, TravisCI runs will check for hack errors, unit test
-failures - and on release builds, run `hhast-lint`. We do not run `hhast-lint`
-on `-dev` builds as `hhast-lint` depends on implementation details of HHVM and
-Hack which change frequently.
+使用以上配置，TravisCI 在运行的时候将会检查 Hack 错误、单元测试失败；以及在发布构建时执行 `hhast-lint`。我们不在 `-dev` 构建时执行 `hhast-lint`，因为 `hhast-lint` 依赖与 HHVM/Hack 的实现细节，而 HHVM/Hack 的实现细节迭代得很频繁。
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
 
 [fbexpect]: https://github.com/hhvm/fbexpect
 [HackTest]: https://github.com/hhvm/hacktest
 [HHAST]: https://github.com/hhvm/hhast
-[Hack Standard Library]: https://github.com/hhvm/hsl/
+[Hack 标准库]: https://github.com/hhvm/hsl/
 [hhvm-autoload]: https://github.com/hhvm/hhvm-autoload
-[install Composer]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos
+[安装 Composer]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos
