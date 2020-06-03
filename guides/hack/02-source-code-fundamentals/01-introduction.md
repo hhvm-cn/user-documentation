@@ -11,3 +11,7 @@
 * [作用域](scope.md)
 * [脚本包含](script-inclusion.md)
 * [变量](variables.md)
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
