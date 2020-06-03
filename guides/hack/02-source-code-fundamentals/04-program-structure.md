@@ -19,7 +19,7 @@
 
 ## 包含其他文件
 
-A file can import another file via [inclusion](script-inclusion.md).
+一个文件可以通过[包含](script-inclusion.md)来导入其他文件。
 
 ## 旧版文件
 
