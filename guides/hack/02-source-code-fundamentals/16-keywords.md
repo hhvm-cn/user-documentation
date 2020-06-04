@@ -1,4 +1,4 @@
-Keywords are case-sensitive, reserved words; they *cannot* be used as names.
+关键词是区分大小写的保留字，*不能*用作变量名等。
 
 ```Hack
 abstract   arraykey   as   async   await   break   case   catch   class   classname   clone   const   continue   default   do
@@ -8,6 +8,8 @@ protected   public   require   require_once   return   self   shape   static   s
 tuple   type   use   while   yield
 ```
 
-Strictly speaking, `false`, `nonnull`, `null`, and `true` are *not* keywords; however, they do have predefined meanings,
-and can be thought of as keywords. Likewise, for the names of the intrinsic functions (such as `echo` and `invariant`).
+严格来说，`false`、`nonnull`、`null` 和 `true` *不是*关键词，但是它们确实具有预定义的含义，可以视为关键词。此外，对于内置函数的名称（例如`echo`和`invariant`）也是同样的道理。
 
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
