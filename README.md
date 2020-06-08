@@ -1,4 +1,4 @@
-# HHVM/Hack 开发者中文文档 [![Build Status](https://travis-ci.org/hhvm/user-documentation.svg?branch=master)](https://travis-ci.org/hhvm/user-documentation)
+# HHVM/Hack 开发者中文文档 [![Build Status](https://api.travis-ci.org/hhvm-cn/user-documentation.svg?branch=master)](https://travis-ci.org/hhvm-cn/user-documentation)
 
 本仓库包含 [HHVM/Hack开发者中文文档](https://github.com/hhvm-cn/user-documentation) 的文档和构建文档的源码，我们非常期待您能与我们一起翻译或者是[提出反馈](https://github.com/hhvm-cn/user-documentation/issues/new)！
 
