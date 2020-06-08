@@ -1,20 +1,17 @@
-Names are used to label variables, constants, functions, and user-defined types, among other things. A name *must* begin
-with an upper- or lowercase letter or underscore, which can optionally be followed by those same characters or decimal digits.
+名称用于标记变量、常量、函数以及用户自定义类型等。名称*必须*是由大写或者小写字母或者是下划线开头，后面可以跟其他字符或十进制数字，相同的也可以。
 
-Local variable names, function parameter names and property names *must* be preceded by `$`. For example:
+局部变量名、函数参数名和属性名*必须*以 `$` 开头，例如：
 
 @@ names-examples/various-names.php @@
 
-The name `$_`, referred to as the *placeholder variable*, is reserved for use in the
-[list intrinsic function](../expressions-and-operators/list.md) and the [foreach statement](../statements/foreach.md).
+名称 `$_` 被称为`变量`，被保留用于[列出内部函数](../expressions-and-operators/list.md)和[foreach 语句](../statements/foreach.md)。
 
-The name `$this` is predefined inside any instance method or constructor when that method is called from within an object context.
-`$this` is read-only and designates the object on which the method is being called, or the object being constructed. The type of
-`$this` is [`this`](../built-in-types/this.md).
+名称 `$this` 被预定义在实例方法或构造函数内部，用于对象调用自身方法。`$this`是只读的，它指定要在其上调用方法的对象或正在构造的对象。`$this` 的类型是 [`this`](../built-in-types/this.md)。
 
-Names beginning with two underscores (__) are reserved by the Hack language.
+以双下划线（__）开头的名称被 Hack 语言保留。
 
-Note that [XHP classes](../XHP/introduction) have different name
-constraints. Class names may contain `:`, and must start with
-`:`. [XHP categories](../XHP/extending#children__categories) names
-start with `%`.
+注意，[XHP classes](../XHP/introduction)是另一种命名规则，类名可能会包含 `:`，并且一定是以 `:` 开头的。[XHP categories](../XHP/extending#children__categories) 的名称以 `%` 开头。
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
