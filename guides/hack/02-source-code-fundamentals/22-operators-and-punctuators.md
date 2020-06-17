@@ -1,25 +1,23 @@
-Operators are symbols used in expressions to describe operations involving one or more operands, and that yield a resulting
-value, produce a side-effect, or some combination thereof.  For example:
+操作符是用于有一个或多个操作数的表达式中的符号，它可以是得到结果值、使表达式产生副作用或者是其他组合，例如：
 
 ```Hack
-$retailPrice = $costPrice + $markup // = and + operators
-$count++                            // side-effect postfix ++
-$j = ++$i                           // = and side-effect prefix ++
-\sqrt(12.34)                        // function-call operator ()
+$retailPrice = $costPrice + $markup // = 和 + 运算符
+$count++                            // 产生副作用的后缀 ++
+$j = ++$i                           // = 和 产生副作用的前缀 ++
+\sqrt(12.34)                        // 函数调用符 ()
 ```
 
-Punctuators are symbols used for grouping and separating. For example:
+标点符号用于分组或分隔，例如：
 
 ```Hack
 function move(float $x, float $y): void { ... }
 ```
 
-where `(`, `,`, `)`, `:`, `{`, and `}` are punctuators.
+`(`， `，`， `)`， `:`， `{`， 和 `}` 是标点符号。
 
-An operator or punctuator involving more than one character must be written *without* any embedded white space. For
-example, `++` and `+ +` are *not* equivalent!
+操作符或标点符号涉及到超过一个字符时必须*不能*在中间用空格隔开。例如，`++` 和 `+ +` 是*不*相同的！
 
-The complete set of operator and punctuators is:
+完整的操作符和标点符号如下：
 
 ```Hack
 [   ]    (   )   {    }   .   ->   ++   --   **   *   +   -   ~   !
@@ -27,3 +25,7 @@ $   /   %   <<   >>   <   >   <=   >=   ==   ===   !=   !==   ^   |
 &   &&  ||   ?   ??   :   ; =   **=   *=   /=   %=   +=   -=   .=   <<=
 >>=   &=   ^=   |=   ,   @   ::   =>   ==>   ?->   \   ...    |>   $$
 ```
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
