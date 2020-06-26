@@ -1,17 +1,15 @@
-## Boolean Literals
+## 布尔字面量
 
-The literals `true` and `false` represent the Boolean values True and False, respectively. The type of a Boolean
-literal is `bool`. For example:
+字面量 `true` 和 `false` 分别表示布尔值“真”和“假”，布尔字面量的类型是 `bool`。比如：
 
 ```Hack
 $val = true;
 if ($val === false) ...
 ```
 
-## Integer Literals
+## 整数字面量
 
-Integer literals can be written as decimal; hexadecimal (with prefix `0x` or `0X`, and including letters A-F or a-f);
-octal (with prefix `0`); or binary (with prefix `0b` or `0B`).  The type of an integer literal is `int`.  For example:
+整数字面量可被写作十进制数、十六进制数（以 `0x` 或者 `0X` 作为前缀，包含有字母 A-F 或者是 a-f）、八进制数（以 `0` 开头），又或者是二进制数（以 `0b` 或者 `0B` 开头）。整数字面量的类型是 `int`。例如：
 
 ```Hack
 $count = 10      // decimal 10
@@ -19,32 +17,29 @@ $count = 10      // decimal 10
 0XAf << 012      // hexadecimal Af and octal 12
 ```
 
-## Floating-Point Literals
+## 浮点字面量
 
-Floating-point literals typically have an integer part, a decimal point, and a fractional part. They may also have an
-exponent part. They are written using decimal digits.  The type of a floating-point literal is `float`.  For example:
+浮点字面量通常包含整数部分、小数点以及小数部分，也有可能会有指数部分。它们是用十进制数字来表示的。浮点字面量的类型是 `float`。例如：
 
 ```Hack
 123.456 + 0.6E27 + 2.34e-3
 ```
 
-The predefined constants `INF` and `NAN` provide access to the floating- point values for infinity and Not-a-Number, respectively.
+预定义的常量 `INF` 和 `NAN` 分别提供对无穷大浮点值和非数字浮点值的访问。
 
 ## String Literals
 
-A string literal can have one of the following forms:
-* [single-quoted string](#string-literals__single-quoted-string-literals)
-* [double-quoted string](#string-literals__double-quoted-string-literals)
-* [heredoc string](#string-literals__heredoc-string-literals)
-* [nowdoc string](#string-literals__nowdoc-string-literals)
+字符串字面量可以是以下的任意一种形式：
+* [单引号字符串](#string-literals__single-quoted-string-literals)
+* [双引号字符串](#string-literals__double-quoted-string-literals)
+* [heredoc 字符串](#string-literals__heredoc-string-literals)
+* [nowdoc 字符串](#string-literals__nowdoc-string-literals)
 
-A string literal is a sequence of zero or more characters delimited in some fashion. The delimiters are not part of
-the literal's content. The type of a string literal is `string`.
+字符串是以某种方式分隔的有零至多个字符组成的序列，分隔符不属于字符串的内容。字符串字面量的类型是 `string`。
 
 ### Single-Quoted String Literals
 
-A single-quoted string literal is a string literal delimited by single-quotes ('). The literal can contain any source
-character except single-quote (') and backslash (\\), which can only be represented by their corresponding escape sequence, \\' and \\\\.  For example:
+单引号字符串是由单引号（'）分隔的字符串文字，它允许包含除单引号（'）和反斜线（\\）以外的所有字符，单引号和反斜线需要用它们相应的转义字符，\\' 和 \\\\ 来表示。例如：
 
 ```Hack
 'Welcome to Hack!'
@@ -53,44 +48,41 @@ character except single-quote (') and backslash (\\), which can only be represen
 
 ### Double-Quoted String Literals
 
-A double-quoted string literal is a string literal delimited by double-quotes ("). The literal can contain any source
-character except double-quote (") and backslash (\\), which can only be represented by their corresponding escape sequence, \\" and \\\\.  For example:
+双引号字符串是由双引号（"）分隔的字符串文字，它允许包含除双引号（"）和反斜线（\\）以外的所有字符，双引号和反斜线需要用它们相应的转义字符，\\" 和 \\\\ 来表示。例如：
 
 ```Hack
 "Welcome to Hack!"
 "Can embed a double quote (\") and a backslash (\\) like this"
 ```
 
-Certain other (and sometimes non-printable) characters can also be expressed as escape sequences.  An *escape sequence*
-represents a single-character encoding.  For example:
+其他某些（有时是不可打印的）字符也可以表示为转义序列。 *转义序列*表示的是单字符编码。 例如：
 
 ```Hack
-"First line 1\nSecond line 2\n\nFourth line\n"
-"Can embed a double quote (\") and a backslash (\\) like this"
+"第一行1\n第二行2\n\n第四行\n"
+"像这样就可以可以包含双引号（\"）和反斜线（\\）"
 ```
 
-Here are the supported escape sequences:
+以下是受支持的转义序列：
 
-Escape sequence | Character name | Unicode character
+转义序列 | 字符名 | Unicode 字符
 --------------- | --------------| ------
-\$  | Dollar sign | U+0024
-\"  | Double quote | U+0022
-\\\\  | Backslash | U+005C
-\e  | Escape | U+001B
-\f  | Form feed | U+000C
-\n  | New line | U+000A
-\r  | Carriage Return | U+000D
-\t  | Horizontal Tab | U+0009
-\v  | Vertical Tab | U+000B
-\ooo |  1-3-digit octal digit value ooo |
-\xhh or \Xhh  | 1-2-digit hexadecimal digit value hh | U+00hh
-\u{xxxxxx} | UTF-8 encoding of Unicode codepoint U+xxxxxx | U+xxxxxx
+\$  | 美元符 | U+0024
+\"  | 双引号 | U+0022
+\\\\  | 反斜线 | U+005C
+\e  | 逃逸 | U+001B
+\f  | 换页 | U+000C
+\n  | 换行 | U+000A
+\r  | 回车 | U+000D
+\t  | 水平制表符 | U+0009
+\v  | 垂直制表符 | U+000B
+\ooo |  1-3位八进制数字值 ooo |
+\xhh or \Xhh  | 1-2位十六进制数字值 hh | U+00hh
+\u{xxxxxx} | UTF-8 编码的 Unicode 码点 U+xxxxxx | U+xxxxxx
 
-Within a double-quoted string literal a dollar ($) character *not* escaped by a backslash (\\) is handled using *variable
-substitution rules*, which follow.
+在双引号字符串中，*没有*被反斜线（\\）转义的美元符（$）将用如下*变量替换规则*来处理。
 
-When a variable name is seen inside a double-quoted string, after that variable is evaluated, its value is converted to `string`
-and is substituted into the string in place of the variable-substitution expression. Subscript or property accesses are resolved
+当双引号字符串中遇到变量名时，它将会被求值并转换成字符串然后被替代到表达式中。
+Subscript or property accesses are resolved
 according to the rules of the [subscript operator](../expressions-and-operators/subscript.md) and
 [member selection operator](../expressions-and-operators/member-selection.md), respectively. If the character sequence following
 the `$` does not parse as a recognized name, then the `$` character is instead interpreted verbatim and no variable substitution
@@ -124,18 +116,22 @@ nowdoc string literal is not subject to variable substitution.  For example:
 
 No white space is permitted between the start id and its enclosing single quotes (').
 
-## The Null Literal
+## 空字面量
 
-There is one null-literal value, `null`, which has type `null`.  For example:
+有一个空字面量，`null`，其类型为 `null`。例如：
 
 ```Hack
 function log(num $arg, ?num $base = null): float { ... }
 ```
 
-Here, `null` is used as a default argument value in the library function `log`.
+在这里，`null` 被用作函数 `log` 的默认参数值。
 
-In the following example:
+在下面的例子中：
 
 @@ literals-examples/null-literal.php @@
 
-`null` is used to initialize two data fields in a shape.
+`null` 被用于初始化 shape 中的两个数据域。
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
