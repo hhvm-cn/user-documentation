@@ -43,7 +43,7 @@ $count = 10      // decimal 10
 
 ```Hack
 'Welcome to Hack!'
-'Can embed a single quote (\') and a backslash (\\) like this'
+'可以像这样嵌入单引号（\"）和反斜线（\\）'
 ```
 
 ### Double-Quoted String Literals
@@ -52,7 +52,7 @@ $count = 10      // decimal 10
 
 ```Hack
 "Welcome to Hack!"
-"Can embed a double quote (\") and a backslash (\\) like this"
+"可以像这样嵌入双引号（\"）和反斜线（\\）"
 ```
 
 其他某些（有时是不可打印的）字符也可以表示为转义序列。 *转义序列*表示的是单字符编码。 例如：
@@ -81,40 +81,28 @@ $count = 10      // decimal 10
 
 在双引号字符串中，*没有*被反斜线（\\）转义的美元符（$）将用如下*变量替换规则*来处理。
 
-当双引号字符串中遇到变量名时，它将会被求值并转换成字符串然后被替代到表达式中。
-Subscript or property accesses are resolved
-according to the rules of the [subscript operator](../expressions-and-operators/subscript.md) and
-[member selection operator](../expressions-and-operators/member-selection.md), respectively. If the character sequence following
-the `$` does not parse as a recognized name, then the `$` character is instead interpreted verbatim and no variable substitution
-is performed.
+当双引号字符串中遇到变量名时，它将会被求值并转换成字符串然后被替代到表达式中。下标或属性访问将分别根据[下标运算符](../expressions-and-operators/subscript.md)和[成员选择运算符](../expressions-and-operators/member-selection.md)的规则进行解析。 如果 `$` 后面的字符序列没有解析为可识别的名称，则 `$` 字符将逐字解释，并且不执行变量替换。
 
-Consider the following example:
+参考以下示例：
 
 @@ literals-examples/dq-variable-substitution.php @@
 
-### Heredoc String Literals
+### Heredoc 字符串
 
-A heredoc string literal is a string literal delimited by "`<<< id`" and "`id`". The literal can contain any source character.
-Certain other (and sometimes non-printable) characters can also be expressed as [escape sequences](#string-literals__double-quoted-string-literals).
-A heredoc literal supports variable substitution as defined for [double-quoted string literals](#string-literals__double-quoted-string-literals).
-For example:
+Heredoc 是一个由 “`<<< id`” 和 “`id`” 包括的字符串，它可以包含任意的原始字符， 其他某些（有时是不可打印的）字符也可以表示为[转义序列](#string-literals__double-quoted-string-literals)。Heredoc 支持对[双引号字符串](#string-literals__double-quoted-string-literals)中的变量进行替换。
+举例：
 
 @@ literals-examples/heredoc-literals.php @@
 
-The start and end id must be the same. Only horizontal white space is permitted between `<<<` and the start id. No
-white space is permitted between the start id and the new-line that follows. No white space is permitted between the
-new-line and the end id that follows. Except for an optional semicolon (`;`), no characters&mdash;not even comments or white
-space&mdash;are permitted between the end id and the new-line that terminates that source line.
+开始标记和结束标记必须是一样的，且 `<<<` 和开始标记之间只允许有水平方向的空格，开始标记到换行符之间不允许有空格；换行符和结束标记之间也不允许有空格。结束标记这行代码除了可选的分号（;）外，不允许有其他的字符——甚至哪怕是注释或者是空格。
 
-### Nowdoc String Literals
+### Nowdoc 字符串
 
-A nowdoc string literal looks like a [heredoc string literal](#string-literals__heredoc-string-literals) except that in the former the start
-id is enclosed in single quotes ('). The two forms of string literal have the same semantics and constraints except that a
-nowdoc string literal is not subject to variable substitution.  For example:
+Nowdoc 跟 `Heredoc` 长得很像，除了前者的开始标记是包含在单引号（'）中的。两种形式的字符串具有相同的语义和约束，只是 Nowdoc 不受变量替换规则的约束，例如：
 
 @@ literals-examples/nowdoc-literals.php @@
 
-No white space is permitted between the start id and its enclosing single quotes (').
+开始标记和单引号（'）之间不允许有空格。
 
 ## 空字面量
 
