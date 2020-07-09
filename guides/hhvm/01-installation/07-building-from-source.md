@@ -1,34 +1,32 @@
-Building from source is advisable generally when you need features that exist in our source that are not in a [package](http://beta.docs.hhvm.com/hhvm/installation/introduction#prebuilt-packages). Otherwise, installing from a package is the easiest and most stable way to get up and running.
+一般来说，当你需要[官方提供的编译好的包](https://docs.hhvm-cn.com/hhvm/installation/introduction#prebuilt-packages)没有的功能时，建议从源码编译。 不然的话，直接安装官方提供的编译好的包是最简单和最稳定的方式。
 
-## Requirements
+## 编译环境要求
 
-- An `x86_64` system
-- Several GB of RAM
-- MacOS:
-  - Sierra or High Sierra
-  - Clang from Xcode Command Line Tools
+- `x86_64` 架构的系统
+- 几个 GB 的内存
+- macOS:
+  - Sierra 或者 High Sierra
+  - Xcode 命令行工具中的 Clang
 - Linux:
-  - GCC 5 or GCC 7
-  - we only actively support building on distributions we create binary packages for; your mileage may vary on other systems
+  - GCC 5 或者 GCC 7
+  - 目前仅支持在官方发布二进制包的发行版上编译；在其他官方未支持的系统上可能会遇到一些 Bug。
 
-We only support building with the bundled OCaml; you may need to uninstall
-(or `brew unlink` on Mac) other ocamlc and ocamlbuild binaries before
-building HHVM.
+官方只支持使用绑定的 OCaml 进行编译；在编译 HHVM 之前，你可能需要卸载
+（或者通过 macOS 上的 `brew unlink` 命令）其他 ocamlc 和 ocamlbuild 的二进制文件。
 
 ### GCC 5
 
-If your Linux-based system comes with an earlier GCC, you must build GCC and G++; we [script a minimal build](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc) for
-several of our binary packages.
+如果你的 Linux 系统带有早期的 GCC，你必须重新编译 GCC 和 G++。 官方为二进制包提供了一个[轻量级编译的 bash 脚本](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc)。
 
-HHVM might build with GCC 4.9, however:
- - we are no longer testing this
- - HHVM is [known to trigger optimization bugs in GCC 4.9](https://github.com/facebook/hhvm/issues/8011)
+HHVM 可以通过 GCC 4.9 编译，然而：
+ - 官方不再对此进行测试
+ - HHVM 会[在 GCC 4.9 中触发优化错误](https://github.com/facebook/hhvm/issues/8011)。
 
-## Installing Build Dependencies
+## 安装编译依赖
 
-### Debian or Ubuntu
+### Debian 或者 Ubuntu
 
-If you haven't already added our apt repositories (e.g. to install binary packages):
+如果你还没有添加官方的 apt 仓库（如安装二进制包）：
 
 ```
 $ apt-get update
@@ -36,7 +34,7 @@ $ apt-get install software-properties-common apt-transport-https
 $ apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 ```
 
-To install the build dependencies:
+安装编译依赖：
 
 ```
 $ add-apt-repository -s https://dl.hhvm.com/debian
@@ -54,12 +52,11 @@ $ brew tap hhvm/hhvm
 $ brew deps --include-build hhvm | xargs brew install
 ```
 
-### Other Distributions
+### 其他 Linux 发行版
 
-It's best to obtain the dependency list from our nightly packaging system, to ensure you're using an
-up-to-date list; to do this, search https://github.com/hhvm/packaging/ for `Build-Depends:`
+最好从[官方的的封装](https://github.com/hhvm/packaging/)中搜索 `Build-Depends:` 以确保你使用的是最新的依赖列表。
 
-## Downloading the HHVM source-code
+## 下载 HHVM 源码
 
 ```
 git clone git://github.com/facebook/hhvm.git
@@ -67,9 +64,9 @@ cd hhvm
 git submodule update --init --recursive
 ```
 
-## Building HHVM
+## 编译 HHVM
 
-This will take a *long* time.
+这将会花费 *很长* 的时间。
 
 ```
 cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock .
@@ -77,28 +74,27 @@ make -j [number_of_processor_cores] # eg. make -j 4
 sudo make install
 ```
 
-### Custom GCC
+### 自定义的 GCC
 
-If you have built your own GCC, you will need to pass additional options to cmake:
+如果你编译了自定义的 GCC，你将需要向 cmake 传递额外的参数：
 
 ```
 -DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++ -DSTATIC_CXX_LIB=On
 ```
 
-### MacOS
+### macOS
 
-It's fairly common in some environments to work around `opendirectoryd` issues by scheduling a cronjob to kill it; if you're doing this, disable it before building HHVM, or you
-are likely to get misleading errors such as `/bin/sh: /bin/sh: cannot execute binary file` in the middle of the build.
+在一些环境中，通过调度 cronjob 来杀死 `opendirectoryd` 的问题是很常见的；如果你正在这样做，请在编译 HHVM 之前禁用它，否则你在编译过程中很可能会得到误导性的错误， 如 `/bin/sh: /bin/sh: cannot execute binary file`。
 
-Even when building HHVM from source, it's easiest to use [brew](https://brew.sh) to manage the build environment:
+即使从源码编译 HHVM，使用 [brew](https://brew.sh) 来管理编译环境也是最简单的：
 
 ```
 $ brew sh
 ```
 
-`brew sh` will drop you into a bash shell in a normalized build environment - e.g. `PATH` will be set to include common build tools.
+`brew sh` 会让你在一个规范化的编译环境中进入 bash shell - 如 `PATH` 包含了常见的编译工具。
 
-Inside this shell:
+在这个 bash shell 中：
 
 ```
 # Several of our dependencies are not linked into standard places...
@@ -122,19 +118,19 @@ make # you probably want `make -j<number of cores`, e.g. `make -j12`
 make install
 ```
 
-## Running programs
+## 运行程序
 
-The installed hhvm binary can be found in `/usr/local/bin`.
+安装的 hhvm 可以在 `/usr/local/bin` 中找到。
 
-## Errors
+## 错误处理
 
-If any errors occur, you may have to remove the `CMakeCache.txt` file in the checkout.
+如果出现任何错误，你可能要删除检查中的 `CMakeCache.txt` 文件。
 
-If your failure was on the `make` command, try to correct the error and run `make` again, it should restart from the point it stops. If the error persists, try to remove as explained above.
+如果错误是在 `make` 命令过程中产生，尝试根据错误进行修改并再次运行 `make`，它应该从上次停止的地方开始。如果错误仍然存在，试着按照上文所说的删除 `CMakeCache.txt` 文件。
 
-## Running Tests
+## 运行测试
 
-If you want to run the regression tests, you will first need to install some locales.  These locales should be sufficient, although may be more than are actually needed:
+如果你想运行回归测试，你需要先安装一些语言环境。 这些语言环境应该足够了，可能比实际需要的更多。
 
 ```
   sudo locale-gen en_EN
@@ -148,7 +144,7 @@ If you want to run the regression tests, you will first need to install some loc
   sudo locale-gen zh_CN
 ```
 
-There are 2 families of regression tests. There are about 5000 tests in all. All tests should pass. It takes about 100 CPU minutes to run them all, but the test runner will run them in parallel, using 1 thread per core:
+回归测试一共有 2 组，大约 5000 个测试，所有的测试都应该通过。运行所有测试大约需要 100 个 CPU minutes，但测试运行器会根据每个核心一个线程的原则同时运行它们。
 
 ```
   pushd hphp
@@ -156,3 +152,7 @@ There are 2 families of regression tests. There are about 5000 tests in all. All
     test/run slow
   popd
 ```
+
+---
+
+> *本节由 [Evilran](https://github.com/Evilran) 翻译*
