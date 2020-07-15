@@ -1,26 +1,26 @@
-A constant is a named value. Once defined, the value of the constant *cannot* be changed.  A constant can be defined in one
-of two ways: using the `const` keyword at the top level, or inside a class or
-interface. For example:
+常量是被命了名的值，一旦定义，常量的值就*不能*更改。常量可以用以下两种方式中的一种来定义：在顶层或者在类以及接口的内部通过 `const` 关键字来定义。例如：
 
 @@ constants-examples/defining-constants.php @@
 
-## Context-Dependent Constants
+## 上下文相关常量
 
-The following constants --- sometimes referred to as *magic constants* --- are automatically available to all scripts; their values
-are not fixed:
+以下常量（或者被成为*魔术常量*）在所有脚本中都可以直接使用，并且它们的值不是固定的：
 
- Constant Name                    | Description
- -----------------                | ---------
-`__CLASS__`                       | `string`; The name of the current class. From within a trait method, the name of the class in which that trait is used. If the current namespace is other than the default, the namespace name and "\\" are prepended, in that order. If used outside all classes, the value is the empty string.
-`__DIR__`                         | `string`; The directory name of the script. A directory separator is only appended for the root directory.
-`__FILE__`                        | `string`; The full name of the script.
-`__FUNCTION__`                    | `string`; Inside a function, the name of the current function exactly as it was declared, with the following prepended: If a named namespace exists, that namespace name followed by "\". If used outside all functions, the result is the empty string. For a method, no parent-class prefix is present. (See `__METHOD__` and [anonymous functions](../functions/anonymous-functions.md).)
-`__LINE__`                        | `int`; the number of the current source line
-`__METHOD__`                      | `string`; Inside a method, the name of the current method exactly as it was declared, with the following prepended, in order: If a named namespace exists, that namespace name followed by "\"; the parent class name or trait name followed by `::`. If used outside all methods, the result is the same as for `__FUNCTION__`.
-`__NAMESPACE__`                   | `string`; The name of the current namespace exactly as it was declared. For the default namespace, the result is the empty string.
-`__TRAIT__`                       | `string`; The name of the current trait. From within a trait method, the name of the current trait. If used outside all traits, the result is the empty string.
+ 常量名                    | 说明
+ -----------------         | ---------
+`__CLASS__`                | `string`； 获取当前类的名称。在 trait 中使用时，将会得到使用了该 trait 的类的名称。如果当前命名空间不是默认命名空间，那么命名空间和“\\”将会出现在前面。如果在类的外部使用，将得到空字符串。
+`__DIR__`                  | `string`； 获取当前脚本所在目录的名称。只有根目录时才会在末尾出现目录分隔符。
+`__FILE__`                 | `string`； 获取当前脚本的完整文件名。
+`__FUNCTION__`             | `string`； 在函数中时，获取当前函数被定义时的名称，且当命名空间存在时，将以命名空间和“\\”作为前缀。如果是在函数外部调用，将得到空字符。在方法中调用时，不会得到类名。（参见 `__METHOD__` 和[匿名函数](../functions/anonymous-functions.md)）
+`__LINE__`                 | `int`； 获取当前代码的行号。
+`__METHOD__`               | `string`； 在方法内调用时，将得到当前方法被声明的名称（以`::`将类名或者 trait 名隔开），且当命名空间存在时，将以命名空间和“\\”作为前缀。如果在方法外调用，结果和 `__FUNCTION__` 一致。
+`__NAMESPACE__`            | `string`； 获取当前命名空间名称。如果时默认命名空间，将会得到空字符串。
+`__TRAIT__`                | `string`； 获取当前 trait 的名称。在 trait 里的方法调用时，将得到当前 trait 的名称；在 trait 外部调用时，得到空字符串。
 
-## Core Predefined Constants
+## 核心预定义常量
 
-Namespace HH\Lib\Math contains a number of integer-related constants (such as `INT64_MAX` and `INT64_MIN`).
+命名空间 HH\Lib\Math 中包含了大量跟整型相关的常量（例如 `INT64_MAX` 和 `INT64_MIN`）
 
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
