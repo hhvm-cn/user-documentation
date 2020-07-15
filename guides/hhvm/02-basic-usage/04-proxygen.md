@@ -1,24 +1,25 @@
-HHVM has built-in support for two server types: Proxygen and [FastCGI](/hhvm/advanced-usage/fastCGI).
+HHVM 内置支持两种类型的 HTTP 服务：Proxygen 和 [FastCGI](/hhvm/advanced-usage/fastCGI)。
 
-Proxygen is a full web server built directly into HHVM, and is recommended since it is generally the easiest to get up and running. It serves web requests *fast*.  Proxygen provides you a high performance web server that is equivalent to what something like the combination of FastCGI and nginx might provide.
+Proxygen 是内置在 HHVM 中完整的 Web 服务器。官方建议使用它，因为它在一般情况下是最容易启动和运行的。 它对 web 请求处理速度*快*。Proxygen 提供了一个高性能的 web 服务器，它的性能相当于 FastCGI 和 NGINX 的组合。
 
-## Using Proxygen
+## 使用 Proxygen
 
-To use Proxygen when running HHVM in server mode:
+在服务器模式下运行 HHVM 时使用 Proxygen：
 
 ```
 hhvm -m server -p 8080
 ```
 
-Your port can be whatever you want, of course, via either the following command line configuration setting that you would append to the command above: `-d hhvm.server.port=7777`, or putting `hhvm.server.port=7777` in your `server.ini` file.
+当然，你可以通过命令 `-d hhvm.server.port=7777` 来自定义端口号配置，或者在 `server.ini` 文件中写入 `hhvm.server.port=7777`。
 
-Since Proxygen is the default, you don't need to explicitly specify it as the server type, but you could, for verboseness, append the following to the command above as well: `-d hhvm.server.type=proxygen`.
+由于 Proxygen 是默认的，你不需要明确地指定它为服务类型，但为了简洁起见，你可以在上面的命令中添加以下内容：`-d hhvm.server.type=proxygen`。
 
-## Example Proxygen Configuration
+## Proxygen 配置示例
 
-While not as configurable as a FastCGI/nginx combination, Proxygen does provide sensible defaults for many applications. Thus the simple Proxygen startup sequence above will be just fine.
+虽然没有 FastCGI/NGINX 组合的可配置性强，但 Proxygen 确实为许多应用程序提供了合理的默认值。因此，像上文简单的命令顺序启动 Proxygen 就可以了。
 
-However, here is an example of some possible configuration options that you could also add/change to your `server.ini` or as `-d` options at the command line:
+
+然而，这里有一些支持的配置选项的例子，你也可以添加/更改到你的 `server.ini` 文件或者通过命令行中的 `-d` 选项进行配置：
 
 ```
 ; some of these are not necessary since they are the default value, but
@@ -34,27 +35,31 @@ hhvm.server.error_document404 = index.php
 hhvm.server.source_root=/var/www/public
 ```
 
-## Automatic Service Startup
+## 自动化服务的启动
 
-The HHVM Debian prebuilt packages ship with init scripts that start in FastCGI mode by default, so if you want to automatically start HHVM as a service, you need to do some configuration tweaking. Note that this setup is optional; you can manually run HHVM as above, and it will work just fine.
+HHVM Debian 预制包中的 init 脚本默认以 FastCGI 模式启动，如果你想自动地把 HHVM 作为一个服务启动，你需要做一些配置调整。请注意，这个设置是可选的；你也可以像上文一样手动地运行 HHVM，它会正常工作。
 
-The configuration we need to edit is in `/etc/hhvm/server.ini`. We first need to remove the following line which is in that file by default:
+我们需要更改的配置在 `/etc/hhvm/server.ini` 文件中。 我们首先需要删除默认的以下这一行配置：
 
 ```
 hhvm.server.type = fastcgi
 ```
 
-We also need to add a line that looks like this, to tell HHVM where our code is. Replace `/var/www` with your code's location, of course:
+我们还需要添加一行类似这样的内容，来告诉 HHVM 我们的源码在哪里。如下，替换 `/var/www` 为你的源码所在位置：
 
 ```
 hhvm.server.source_root = /var/www
 ```
 
-You may also want to change `hhvm.server.port` option; it's set to `9000` by default, but `80` or `8080` makes more sense. Finally, note the value of `hhvm.log.file`, which is where error messages will go. It's set to `/var/log/hhvm/error.log` by default, which is just fine unless you'd rather they go elsewhere.
+你可能还想修改 `hhvm.server.port` 选项；它默认设置为 `9000`，但是 `80` 或者 `8080` 可能会更加合适。 最后，如果你想修改错误日志的存储位置，请注意 `hhvm.log.file` 选项， 默认设置为 `/var/log/hhvm/error.log`，它足以适用于一般的应用程序。
 
-Then, you can run these commands to set HHVM to start up at boot, and to start it as a service now:
+然后，你可以运行以下命令来设置 HHVM 在开机时启动，并且现在就把它作为一个服务来启动。
 
 ```
 sudo update-rc.d hhvm defaults
 sudo service hhvm restart
 ```
+
+---
+
+> *本节由 [Evilran](https://github.com/Evilran) 翻译*
