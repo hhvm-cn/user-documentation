@@ -4,25 +4,25 @@
 
 ## What?
 
-There are three keys areas to this repo:
+以下是关于本仓库的三个关键点：
 
-* **User Documentation**: The [guides](https://github.com/hhvm/user-documentation/tree/master/guides). We realized that finding out how to do simple things like setting up HHVM to more complicated things like using `async` were more tedious than they should be. The documentation should be a friend, not a nuisance.
-* **API Reference**: We use our own HHVM code documentation for Hack and HHVM specific API documentation. And for anything PHP specific, we defer to [php.net](http://php.net). This serves two purposes:
+* **用户文档**： The [guides](https://github.com/hhvm-cn/user-documentation/tree/master/guides)。 We realized that finding out how to do simple things like setting up HHVM to more complicated things like using `async` were more tedious than they should be. The documentation should be a friend, not a nuisance.
+* **API Reference**： We use our own HHVM code documentation for Hack and HHVM specific API documentation. And for anything PHP specific, we defer to [php.net](http://php.net). This serves two purposes:
     - The HHVM source code is the source of truth
     - We don't duplicate PHP documentation, and [their documentation](http://php.net) will serve as the source of truth for PHP-specific documentation
-* **Infrastructure**: An easier, more modular and scalable way for documentation. Markdown, not docbook, for [user-guide](https://github.com/hhvm/user-documentation/tree/master/guides) content. Easy to follow, Hack-based [source code](https://github.com/hhvm/user-documentation/tree/master/src) for building the site.
+* **基础设施**： 一个更简单、更模块化、可扩展的记录文档的方式。我们用 Markdown 而不是 docbook 来编写[用户文档](https://github.com/hhvm-cn/user-documentation/tree/master/guides)的内容，用易于上手的基于 Hack 的[代码](https://github.com/hhvm-cn/user-documentation/tree/master/src)来构建文档站。
 
 ## How?
 
-Our strategy to create better documentation begins with a re-thinking of our doc infrastructure.
+为了编写更好的文档，我们重新思考了文档的基础设施。
 
-* Markdown instead of docbook provides an easier path for documentation source readability and updates.
-    - Have extensions to support things like example insertion, etc.
+* 用 Markdown 代替 docbook 使得文档源代码的可读性提高了，也让后期更新更容易。
+    - 有支持诸如示例插入等功能的扩展。
 * Token scan our the HHVM code block documentation (instead of reflection) so that rebuilding HHVM isn't necessary to update the documentation.
   - Use [HHAST](https://github.com/hhvm/hhast) and [hh-apidoc](https://github.com/hhvm/hh-apidoc) for docblock parsing
-* Ensure the source code that builds the site is as reusable as possible, so that it has the potential to provide reusability to documentation projects beyond Hack and HHVM.
+* 确保构建站点的代码尽可能可复用，使得其具有可以不止是为 Hack 和 HHVM 构建文档站的能力。
 
-Check out the [source code](https://github.com/hhvm/user-documentation/tree/master/src) for building the site. [`bin/build.php`](https://github.com/hhvm/user-documentation/blob/master/bin/build.php) is where all the execution begins.
+检出[源码](https://github.com/hhvm-cn/user-documentation/tree/master/src) 来编译这个文档站。 [`bin/build.php`](https://github.com/hhvm-cn/user-documentation/blob/master/bin/build.php) 是构建的开端。
 
 ## 利用 Docker 搭建本地文档
 
