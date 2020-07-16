@@ -1,12 +1,18 @@
-Normally, after installing HHVM, you can use the [sensible defaults](../basic-usage/introduction.md) provided to [run Hack and PHP scripts](../basic-usage/command-line.md) or [run HHVM as a server](../basic-usage/server.md).
+一般情况下，在安装 HHVM 后，可以使用官方提供的[合理默认值](../basic-usage/introduction.md)来[运行 Hack 和 PHP 脚本](../basic-usage/command-line.md)，或者[将 HHVM 作为服务来运行](../basic-usage/server.md)。
 
-While a majority of the time you will not need to tweak the default settings or use the more advanced modes available with HHVM, they are available:
+虽然大多数时候不需要调整默认配置或使用 HHVM 提供的更高级模式，但你也可以这样做：
 
-* [Repo Authoritative](./repo-authoritative.md) mode allows you to compile your entire codebase into one unit, allowing for HHVM to perform highly aggressive optimizations to make your code run quickly.
-* [Daemon](./daemon.md) mode allows you to run HHVM as a background process.
-* The [admin server](./admin-server.md) allows you to monitor HHVM as it is running in server mode.
-* [FastCGI](/hhvm/advanced-usage/fastCGI) is another server type for HHVM that is highly configurable and fast, but requires a separate web server on top of it.
+* [仓库授权](./repo-authoritative.md) 模式可以将整个代码库编译成一个单元，允许 HHVM 执行极致的优化，让代码快速运行。
 
-## Custom Configuration
+* [守护进程](./daemon.md) 模式允许将 HHVM 作为后台进程运行。
+* [管理服务器](./admin-server.md) 允许你监控 HHVM，因为它是在服务器模式下运行的。
 
-There are also a plethora of custom [configuration options](../configuration/introduction.md) that you can set to tweak how HHVM operates when running scripts or running as a server.
+* [FastCGI](/hhvm/advanced-usage/fastCGI) 是 HHVM 的另一种服务器类型，它的可配置性强，速度快，但需要在它的基础上再加一个独立的 web服务器。
+
+## 自定义配置
+
+除此之外，还有大量的[自定义配置选项](../configuration/introduction.md)，你可以设置来调整 HHVM 在运行脚本或作为服务运行时的运作方式。
+
+---
+
+> *本节由 [Evilran](https://github.com/Evilran) 翻译*
