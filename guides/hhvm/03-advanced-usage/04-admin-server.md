@@ -1,36 +1,42 @@
-The admin server allows the administrator of the HHVM server to query and control the HHVM server process. It is different and separate than the primary HHVM server that you specified with `-m server` or `-m daemon`.
+管理服务器允许 HHVM 服务的管理员查询和控制 HHVM 服务进程。它和使用 `-m server` 或者 `-m daemon` 指定的 HHVM 主服务是不一样的，而且是独立分开的。
 
-To turn on the admin server, you specify the following options at the command line via `-d` or within your `server.ini` (or equivalent).
+要启动管理服务器，你可以在命令行通过 `-d` 或者在 `server.ini`（或其他等同的配置文件） 中指定以下选项：
 
 ```
 hhvm.admin_server.port=9001
 hhvm.admin_server.password=SomePassword
 ```
 
-The `port` can be any open port. And you should **always specify a password** to secure the admin port since you don't want just anybody being able to control your server. In fact, you will probably want to put the admin server *behind a firewall*. You will specify the password with every request to the admin port.
+`端口`可以是任何开放的端口。而且你**应该指定一个密码**来保护管理端口，因为你不希望任何人都能控制你的服务器。实际上，你可能想把管理服务器*放在防火墙监管下*，那么你需要在每次请求管理端口时指定密码。
 
-The admin server uses the same protocol as the main server - so, if you're using [FastCGI](/hhvm/advanced-usage/fastCGI) mode, the admin server will also be FastCGI, and you will need to configure a front-end webserver (like nginx). If you are using [Proxygen](../basic-usage/proxygen.md) mode, the admin server will be an HTTP server.
+管理服务器与主服务器使用相同的协议 - 因此，如果你使用 [FastCGI](/hhvm/advanced-usage/fastCGI) 模式，管理服务器也将是 FastCGI，你需要另外配置一个 web 服务器（如 NGINX）。如果你使用的是 [Proxygen](../basic-usage/proxygen.md) 模式，管理服务器将是一个 HTTP 服务器。
 
-## Querying the Admin Server
 
-Once you have set up your admin server, you can query it via `curl`.
+## 查询管理服务器
+
+一旦你设置好了管理服务器，你就可以通过 `curl` 来查询它。
 
 ```
 curl http://localhost:9001/
 ```
 
-will bring up a list of commands you can use to control and query your admin server.
+这个命令会显示一个你可以用来控制和查询管理服务器的命令列表。
 
-The port associated with the `curl` command is the `hhvm.admin_server` port set above if you are using [Proxygen](/hhvm/basic-usage/proxygen). *If you are using [FastCGI](/hhvm/advanced-usage/fastCGI)*, then the port will be the webserver port that is the front end to FastCGI.
+如果你使用的是 [Proxygen](/hhvm/basic-usage/proxygen)，那么与 `curl` 命令相关联的端口就是上文设置的 `hhvm.admin_server` 端口，*如果你使用的是 [FastCGI](/hhvm/advanced-usage/fastCGI)*，那么这个端口就是 FastCGI 的web 服务端口。
 
-### Sending a Command
+### 发送命令
 
-Use one of the commands listed with the `curl` sequence above, along with your password, to send a command to the admin server.
+使用上文中带有 `curl` 的指令，加上你的密码，向管理服务器发送命令。
+
 
 ```
 curl http://localhost:9001/compiler-id?auth=SomePassword
 ```
 
-## Further Reference
+## 进一步参考
 
-There is a good [blog post](http://hhvm.com/blog/521/the-adminserver) discussing the admin server even further.
+这里有一篇好的[博客文章](http://hhvm.com/blog/521/the-adminserver)更进一步讨论了管理服务器。
+
+---
+
+> *本节由 [Evilran](https://github.com/Evilran) 翻译*
