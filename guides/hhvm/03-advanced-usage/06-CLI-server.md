@@ -1,45 +1,23 @@
-This module hosts a server on a local socket which can be used to execute
-PHP scripts. The server will delegate file system operations as well as
-proc_open commands to the client, allowing the server to masquerade as the
-client user.
+该模块在本地套接字上托管一个服务器，可以用来执行 PHP 脚本。服务器将把文件系统操作以及  `proc_open` 命令委托给客户端，并且允许服务器伪装成客户端用户。
 
-The main advantage here is that clients can share a single translation cache
-and APC cache, and avoid paying the cost of hhvm startup with each script
-invocation.
+这样做的好处是客户端可以共享一个翻译缓存和 APC 缓存，并避免在每次脚本调用时启动 HHVM 的花销。
 
-Using the CLI server requires no changes to the permission model of the
-server, and as privileged access is delegated to clients the risk of
-privilege escalation within the server is minimized. Additionally the server
-itself is only accessible via local socket, but can share a translation
-cache with requests executing via the webserver.
+使用 CLI 服务器不需要改变服务器的权限模型，而且由于特权访问被委托给客户端，服务器内部的特权升级风险被降到最低。此外，服务器本身只能通过本地套接字访问，但可以与通过 web 服务器执行的请求共享翻译缓存。
 
-This server is still experimental and in particular there is very limited
-transfer of configuration settings from the client. As a result scripts
-executed via this module will be running with settings largely defined by
-the server process. Currently `PHP_INI_USER`, `PHP_INI_ALL`, `ServerVariables`,
-`EnvVariables`, and the remote environment are transferred.
+这个服务器仍然是实验性的，特别是从客户端传输的配置设置非常有限。因此，通过这个模块执行的脚本将在很大程度上由服务器进程决定。目前 `PHP_INI_USER`，`PHP_INI_ALL`，`ServerVariables`，`EnvVariables`，和远程环境都被传输。
 
-Access to the CLI server can be controlled by the runtime options
-`UnixServerAllowed{Users,Groups}`. When both arrays are empty all users will
-be allowed, otherwise only enumerated users and users with membership in
-enumerated groups will be permitted access.
+可以通过运行时选项 `UnixServerAllowed{Users,Groups}` 来控制对 CLI 服务器的访问。当两个数组都为空时，将允许所有用户，否则仅允许枚举用户和在枚举组中具有成员关系的用户访问。
 
-Unit loading within the CLI server is controlled via two different runtime
-options. Unlike ordinary file access the server will attempt to load all
-units directly before falling back to the client.
+CLI 服务器中的单元加载通过两个不同的运行时选项进行控制。与普通的文件访问不同，服务器在返回到客户端之前会尝试直接加载所有单元。
 
-When `UnixServerQuarantineUnits` is set units not opened directly by the server
-process will be written to a per-user unit cache only used for CLI server
-requests by that user.
+当设置了 `UnixServerQuarantineUnits` 后，未被服务器进程直接启动的单元将被写入一个用户单元缓存中，该用户仅用于 CLI 服务器请求。
 
-When `UnixServerVerifyExeAccess` is set the server will verify that the client
-can read each unit before loading them. The client is required to send the
-server a read file descriptor for the unit, which the server will verify is
-open in read mode using `fcntl`, has inode and device numbers matching those
-seen by the server when executing stat.
+当设置了 `UnixServerVerifyExeAccess` 后，服务器将在加载每个单元之前验证客户端是否可以读取它们。客户端需要向服务器发送单元的读文件描述符，服务器将使用 `fcntl` 验证单元在读模式下打开，它的 inode 和设备编号与服务器在执行 stat 时看到的匹配。
 
-A `UnixServerQuarantineApc` is also available, which forces all apc operations
-performed by the CLI server to use a per user cache not shared with the
-webserver.
+`UnixServerQuarantineApc` 也是可用的，它强制 CLI 服务器对每个用户缓存执行的 APC 操作都不与 web 服务器共享。
 
-The INI style runtime options are documented [here](/hhvm/configuration/INI-settings#cli-server).
+[这里](/hhvm/configuration/INI-settings#cli-server)记录了 INI 风格的运行时选项。
+
+---
+
+> *本节由 [Evilran](https://github.com/Evilran) 翻译*
