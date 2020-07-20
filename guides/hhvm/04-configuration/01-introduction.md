@@ -1,22 +1,23 @@
-After [installing HHVM](../installation/introduction.md), you will want to configure it to run scripts from the command line and/or serve web traffic.
+[安装 HHVM](../installation/introduction.md) 后，你可能想配置它从命令行运行脚本和/或作为网络流量的服务。
 
-## Configuration Options
 
-HHVM has a very large set of [configuration options](./INI-settings.md). Many are not meant for the end HHVM user, but there are some key options that will be useful for anyone deploying HHVM.
+## 配置选项
 
-### INI Format
+HHVM 有非常多的[配置选项](./INI-settings.md)。许多选项并不是为终端的 HHVM 用户准备的，但有一些关键的选项对任何部署 HHVM 的使用者都是有用的。
 
-HHVM uses configuration files in [INI format](https://en.wikipedia.org/wiki/INI_file). In an INI file, each line represents a configuration in key/value format, where the key is the name of the option, while the value is the value for that option. For example,
+### INI 格式
+
+HHVM 使用的是 [INI 格式](https://en.wikipedia.org/wiki/INI_file)的配置文件。在一个 INI 文件中，每一行都代表一个 key/value 格式的配置，其中 key 是选项的名称，而 value 是该选项的值。例如：
 
 ```
 hhvm.force_hh = 1
 hhvm.server_variables[MY_VARIABLE] = "Hello"
 ```
 
-These settings can be specified in one of two places, or in a combination of both:
+这些配置可以在两个地方中的一个地方指定，或在两者的组合中指定：
 
-* A configuration file, normally suffixed with `.ini` (e.g., `config.ini`)
-* At the command line using the `-d` flag to the HHVM binary.
+* 在配置文件中，通常后缀为 `.ini` (例如 `config.ini`)
+* 在命令行运行 HHVM 时使用 `-d` 标志指定选项
 
 ```
 hhvm -c config.ini file.php
@@ -24,6 +25,10 @@ hhvm -d hhvm.force_hh = 1 file.php
 hhvm -c config.ini -d hhvm.log.file = /tmp/temp.log -d hhvm.force_hh = 1 file.php
 ```
 
-If the same option is specified more than once, then the option that HHVM reads last will be the value used. HHVM reads the command line left to right and INI configuration files top to bottom.
+如果同一个选项被指定了一次以上，那么 HHVM 会使用最后设置的选项。HHVM 从左到右读取命令行，自顶向下读取 INI 配置文件。
 
-Check out our [INI settings page](/hhvm/configuration/INI-settings#common-options) for the common configuration options you are likely to use day-to-day.
+查看官方的 [INI 设置页面](/hhvm/configuration/INI-settings#common-options)，以了解可能会使用到的常用配置选项。
+
+---
+
+> *本节由 [Evilran](https://github.com/Evilran) 翻译*
