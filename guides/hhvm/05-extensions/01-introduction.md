@@ -1,8 +1,9 @@
-HHVM provides dozens of built-in, integrated extensions and allows for other extensions to be dynamically loaded. Since this is an HHVM user's guide, this does not discuss how to build your own extension, but there are resources for that listed below.
+HHVM 提供了几十个内置的以及集成的扩展，并允许动态加载其他扩展。由于这是 HHVM 的用户指南，所以在这里我们不讨论如何构建自己的扩展，但下面列出了相关的资源。
 
-## Integrated Extensions
 
-If you call `get_loaded_extensions()` from HHVM, you will find that the following extensions are integrated into HHVM
+## 集成扩展
+
+如果你从 HHVM 中调用 `get_loaded_extensions()`，你会发现以下扩展已经被集成到 HHVM 中了：
 
 * [apache](http://php.net/manual/en/book.apache.php)
 * [apc](http://php.net/manual/en/book.apc.php)
@@ -84,22 +85,22 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [zip](http://php.net/manual/en/book.zip.php)
 * [zlib](http://php.net/manual/en/book.zlib.php)
 
-## Dynamically Loaded Extensions
+## 动态加载的扩展
 
 * [dbase](https://github.com/skyfms/hhvm-ext_dbase)
 * [geoip](https://github.com/vipsoft/hhvm-ext-geoip)
 * [msgpack](https://github.com/reeze/msgpack-hhvm)
-* [mongodb](http://github.com/mongodb/mongo-hhvm-driver): Official MongoDB driver as HNI extension
-* [mongofill](https://github.com/mongofill/mongofill-hhvm): Implementation of legacy MongoDB driver in pure PHP
+* [mongodb](http://github.com/mongodb/mongo-hhvm-driver)：官方 MongoDB 驱动作为 HNI 扩展
+* [mongofill](https://github.com/mongofill/mongofill-hhvm)：纯 PHP 中实现传统的 MongoDB 驱动
 * [shp](https://github.com/skyfms/hhvm-ext_shape)
 * [ssdeep](https://github.com/treffynnon/hhvm-ssdeep)
 * [uuid](https://github.com/vipsoft/hhvm-ext-uuid)
 * [uv](https://github.com/chobie/hhvm-uv)
 * [zmq](https://github.com/Orvid/php-zmq)
 
-### Loading
+### 载入
 
-To load a dynamically loaded extension, follow the instructions for that extension. However, it generally goes like this:
+要载入动态加载的扩展，请遵循该扩展的指示说明。不过，一般情况下是这样的：
 
 ```
 cd /path/to/extension
@@ -108,22 +109,26 @@ cmake .
 make
 ```
 
-This will create an `.so` file. Then in your configuration `.ini` file:
+这将创建一个 `.so` 文件。然后在你的 `.ini` 配置文件中：
 
 ```
 extension_dir = /etc/hhvm
 hhvm.extensions[extension_name] = extension.so
 ```
 
-or
+或者
 
 ```
 hhvm.dynamic_extensions[extension_name] = extension.so
 ```
 
-## Building Your Own Extension
+## 构建自己的扩展
 
-Creating your own extension is beyond the scope of this user guide, but there are some good external resources to help get you started:
+建立你自己的扩展超出了本用户指南的范围，但有一些很好的外部资源可以帮助你开始：
 
 * https://github.com/facebook/hhvm/wiki/Extension-API
 * http://blog.golemon.com/2015/01/hhvm-extension-writing-part-i.html
+
+---
+
+> *本节由 [Evilran](https://github.com/Evilran) 翻译*
