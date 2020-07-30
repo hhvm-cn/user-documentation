@@ -18,8 +18,8 @@
 
 * 用 Markdown 代替 docbook 使得文档源代码的可读性提高了，也让后期更新更容易。
     - 有支持诸如示例插入等功能的扩展。
-* Token scan our the HHVM code block documentation (instead of reflection) so that rebuilding HHVM isn't necessary to update the documentation.
-  - Use [HHAST](https://github.com/hhvm/hhast) and [hh-apidoc](https://github.com/hhvm/hh-apidoc) for docblock parsing
+* 通过 Token 扫描 HHVM 代码的 docblock （而不是通过反射），使得重新构建 HHVM 时不一定需要更新文档。
+  - 使用 [HHAST](https://github.com/hhvm/hhast) 和 [hh-apidoc](https://github.com/hhvm/hh-apidoc) 来解析 docblock。
 * 确保构建站点的代码尽可能可复用，使得其具有可以不止是为 Hack 和 HHVM 构建文档站的能力。
 
 检出[源码](https://github.com/hhvm-cn/user-documentation/tree/master/src) 来编译这个文档站。 [`bin/build.php`](https://github.com/hhvm-cn/user-documentation/blob/master/bin/build.php) 是构建的开端。

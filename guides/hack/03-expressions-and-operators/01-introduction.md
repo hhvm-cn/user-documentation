@@ -1,4 +1,4 @@
-**Topics covered in this section**
+**本节主题**
 
 * [Arithmetic, `+`, `*` etc](addition.md)
 * [Array creation](array-creation.md)
