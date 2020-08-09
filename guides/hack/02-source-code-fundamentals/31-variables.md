@@ -1,13 +1,11 @@
-A variable is a named area of data storage that has a type and a value.  Distinct variables may have the same name provided
-they are in different [scopes](scope.md).  A [constant](constants.md) is a variable that, once initialized, its value cannot
-be changed.   Based on the context in which it is declared, a variable has a scope.
+我们通常会对具有类型和值的数据存储区域取个名字，然后称之为变量。不同的变量在不同的[作用域](scope.md)下可以有相同的名字。[常量](constants.md)也是一种变量，只不过它一旦初始化之后，值就不能改变。变量的作用域取决于声明它的上下文。
 
-The following kinds of variable may exist in a script:
--   [Local variable](#local-variables)
--   [Array element](#array-elements)
--   [Instance property](#instance-properties)
--   [Static property](#static-properties)
--   [Class and interface constant](#class-and-interface-constants)
+以下是你的代码中可能出现的几种变量类型：
+ - [局部变量](#local-variables)
+ - [数组元素](#array-elements)
+ - [实例属性](#instance-properties)
+ - [静态属性](#static-properties)
+ - [类和接口常量](#class-and-interface-constants)
 
 ## Local Variables
 
@@ -62,12 +60,16 @@ $colors3[] = "green";                // insert a new element 3
 
 ## Instance Properties
 
-These are described in the [class instance properties](../classes/properties.md) section. They have class scope.
+实例属性在[类实例属性](../classes/properties.md)一节中有描述，它具有类的作用域。
 
 ## Static Properties
 
-These are described in the [class static properties](../classes/properties.md) section. They have class scope.
+静态属性在[类静态属性](../classes/properties.md)一节中有描述，它具有类的作用域。
 
 ## Class and Interface Constants
 
-These are described in the [class constants](../classes/constants.md) section. They have class or interface scope.
+类和接口常量在[类常量](../classes/constants.md)一节中有描述，它们具有类或者接口的作用域。
+
+---
+
+> *本节由 [Y!an](https://yian.me/blog/) 翻译*
